@@ -4,6 +4,7 @@ import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
+import { put } from '@vercel/blob';
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
@@ -21,24 +22,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'No file provided' }, { status: 400 });
     }
 
-    // Convert file to buffer
-    const bytes = await file.arrayBuffer();
-    const buffer = Buffer.from(bytes);
+    let publicUrl: string;
 
-    // Create unique filename
-    const timestamp = Date.now();
-    const filename = `${timestamp}-${file.name}`;
-    const uploadDir = path.join(process.cwd(), 'public', 'uploads');
-    
-    // Ensure upload directory exists
-    await mkdir(uploadDir, { recursive: true });
-    
-    // Write file to public/uploads directory
-    const filepath = path.join(uploadDir, filename);
-    await writeFile(filepath, buffer);
-    
-    // Public URL for the uploaded file
-    const publicUrl = `/uploads/${filename}`;
+    // Use Vercel Blob in production, local storage in development
+    if (process.env.BLOB_READ_WRITE_TOKEN) {
+      // Production: Use Vercel Blob
+      const blob = await put(file.name, file, {
+        access: 'public',
+      });
+      publicUrl = blob.url;
+    } else {
+      // Development: Use local file system
+      const bytes = await file.arrayBuffer();
+      const buffer = Buffer.from(bytes);
+
+      const timestamp = Date.now();
+      const filename = `${timestamp}-${file.name}`;
+      const uploadDir = path.join(process.cwd(), 'public', 'uploads');
+      
+      await mkdir(uploadDir, { recursive: true });
+      
+      const filepath = path.join(uploadDir, filename);
+      await writeFile(filepath, buffer);
+      
+      publicUrl = `/uploads/${filename}`;
+    }
 
     // Update database based on type
     if (type === 'author') {
