@@ -1,36 +1,182 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# TannerCastora.com - Book Landing Page
 
-## Getting Started
+A professional book landing page for "Stig and The Rise of South Dakota State Football" with admin editing capabilities and Vercel deployment.
 
-First, run the development server:
+## Local Development
 
+### Prerequisites
+- Node.js 20+
+- npm
+- Vercel CLI (optional)
+
+### Setup
+
+1. **Clone and install dependencies:**
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. **Set up environment variables:**
+```bash
+cp .env.example .env
+# Edit .env with your values
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. **Initialize database (for local SQLite development):**
+```bash
+npx prisma migrate dev
+npx prisma db seed
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+5. **Start development server:**
+```bash
+npm run dev
+```
 
-## Learn More
+Visit http://localhost:3000
 
-To learn more about Next.js, take a look at the following resources:
+## Admin Portal
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Access the admin portal at http://localhost:3000/admin/login
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Default credentials (from .env):
+- Email: admin@example.com
+- Password: admin123
 
-## Deploy on Vercel
+Features:
+- Edit book details (title, tagline, description, Amazon URL)
+- Edit author information (name, bios)
+- Manage social links (add/edit/delete/reorder, max 6)
+- Image uploads (when GCS is configured)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Deployment to Vercel
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### Prerequisites
+- Vercel account
+- GitHub repository (recommended)
+- Vercel CLI: `npm i -g vercel`
+
+### Setup
+
+1. **Install Vercel CLI and login:**
+```bash
+npm i -g vercel
+vercel login
+```
+
+2. **Link project:**
+```bash
+vercel link
+```
+
+3. **Configure database:**
+- Go to Vercel Dashboard → Storage
+- Create a new Postgres database (Vercel Postgres or Neon)
+- The DATABASE_URL will be automatically added to your project
+
+4. **Configure Blob Storage:**
+- Go to Vercel Dashboard → Storage
+- Create a new Blob store
+- The BLOB_READ_WRITE_TOKEN will be automatically added
+
+5. **Set environment variables:**
+```bash
+vercel env add NEXT_PUBLIC_GA_MEASUREMENT_ID
+vercel env add NEXTAUTH_SECRET
+vercel env add NEXTAUTH_URL
+vercel env add ADMIN_EMAIL  
+vercel env add ADMIN_PASSWORD
+```
+
+6. **Pull environment variables for local development:**
+```bash
+vercel env pull .env.local
+```
+
+### Deploy
+
+**Option 1: Git-based deployment (recommended)**
+- Push to GitHub
+- Import project in Vercel Dashboard
+- Automatic deployments on every push
+
+**Option 2: CLI deployment**
+```bash
+# Preview deployment
+vercel
+
+# Production deployment
+vercel --prod
+```
+
+### Post-deployment
+
+1. **Run database migrations:**
+```bash
+npx prisma migrate deploy
+```
+
+2. **Seed initial data:**
+```bash
+npx prisma db seed
+```
+
+3. **Update NEXTAUTH_URL:**
+- Set to your production URL in Vercel Dashboard
+- Example: `https://your-domain.vercel.app` or custom domain
+
+## Project Structure
+
+```
+stig-site/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   │   ├── auth/         # NextAuth endpoints
+│   │   └── admin/        # Admin API endpoints
+│   ├── admin/            # Admin pages
+│   └── page.tsx          # Home page
+├── components/            # React components
+├── lib/                   # Utility functions
+├── prisma/               # Database schema and migrations
+├── public/               # Static assets
+└── vercel.json           # Vercel configuration (optional)
+```
+
+## Key Features
+
+✅ **Two CTAs only** - Hero and footer Amazon links
+✅ **Clean blue/white theme** - Matches book cover
+✅ **Admin portal** - Edit content without code changes
+✅ **Social Links Manager** - Dynamic social links with icons
+✅ **GA4 Analytics** - Track visitor behavior
+✅ **Vercel optimized** - Edge-ready with automatic scaling
+✅ **Responsive design** - Works on all devices
+✅ **Accessibility** - Keyboard navigation, screen reader support
+
+## Environment Variables
+
+| Variable | Description | Required |
+|----------|-------------|----------|
+| DATABASE_URL | PostgreSQL connection string | Yes |
+| NEXTAUTH_SECRET | Secret for NextAuth.js | Yes |
+| NEXTAUTH_URL | Site URL (production only) | Production |
+| ADMIN_EMAIL | Admin login email | Yes |
+| ADMIN_PASSWORD | Admin login password | Yes |
+| NEXT_PUBLIC_GA_MEASUREMENT_ID | Google Analytics ID | No |
+| BLOB_READ_WRITE_TOKEN | Vercel Blob storage token | Production |
+
+## Development Commands
+
+```bash
+npm run dev           # Start development server
+npm run build         # Build for production
+npm run start         # Start production server
+npm run lint          # Run ESLint
+npm run db:push       # Push schema changes
+npm run db:migrate    # Run migrations
+npm run db:seed       # Seed database
+```
+
+## License
+
+© 2024 All rights reserved.
