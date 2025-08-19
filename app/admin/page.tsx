@@ -248,13 +248,13 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <header className="bg-white shadow">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <header className="bg-white dark:bg-gray-800 shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-          <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>
+          <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Admin Dashboard</h1>
           <button
             onClick={() => signOut({ callbackUrl: '/' })}
-            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700"
+            className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 dark:bg-red-700 dark:hover:bg-red-600"
           >
             Sign Out
           </button>
@@ -268,15 +268,15 @@ export default function AdminDashboard() {
           </div>
         )}
 
-        <div className="bg-white rounded-lg shadow">
-          <div className="border-b border-gray-200">
+        <div className="bg-white dark:bg-gray-800 rounded-lg shadow">
+          <div className="border-b border-gray-200 dark:border-gray-700">
             <nav className="-mb-px flex">
               <button
                 onClick={() => setActiveTab('book')}
                 className={`py-2 px-6 ${
                   activeTab === 'book'
-                    ? 'border-b-2 border-blue-500 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
                 Book Details
@@ -285,8 +285,8 @@ export default function AdminDashboard() {
                 onClick={() => setActiveTab('author')}
                 className={`py-2 px-6 ${
                   activeTab === 'author'
-                    ? 'border-b-2 border-blue-500 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
                 Author Details
@@ -295,8 +295,8 @@ export default function AdminDashboard() {
                 onClick={() => setActiveTab('social')}
                 className={`py-2 px-6 ${
                   activeTab === 'social'
-                    ? 'border-b-2 border-blue-500 text-blue-600'
-                    : 'text-gray-500 hover:text-gray-700'
+                    ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
+                    : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
                 }`}
               >
                 Social Links
@@ -308,31 +308,31 @@ export default function AdminDashboard() {
             {activeTab === 'book' && book && (
               <form onSubmit={handleBookSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Title</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Title</label>
                   <input
                     type="text"
                     value={book.title}
                     onChange={(e) => setBook({ ...book, title: e.target.value })}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Book Summary</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Book Summary</label>
                   <textarea
                     value={book.tagline}
                     onChange={(e) => setBook({ ...book, tagline: e.target.value })}
                     rows={6}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
-                  <p className="mt-1 text-sm text-gray-500">This compelling summary appears on the homepage to drive reader interest</p>
+                  <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">This compelling summary appears on the homepage to drive reader interest</p>
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Amazon URL</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Amazon URL</label>
                   <input
                     type="url"
                     value={book.amazonUrl}
                     onChange={(e) => setBook({ ...book, amazonUrl: e.target.value })}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div>
@@ -364,30 +364,30 @@ export default function AdminDashboard() {
             {activeTab === 'author' && author && (
               <form onSubmit={handleAuthorSubmit} className="space-y-4">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Name</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Name</label>
                   <input
                     type="text"
                     value={author.name}
                     onChange={(e) => setAuthor({ ...author, name: e.target.value })}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Short Bio</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Short Bio</label>
                   <textarea
                     value={author.bioShort}
                     onChange={(e) => setAuthor({ ...author, bioShort: e.target.value })}
                     rows={3}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700">Full Bio</label>
+                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Full Bio</label>
                   <textarea
                     value={author.bioFull}
                     onChange={(e) => setAuthor({ ...author, bioFull: e.target.value })}
                     rows={6}
-                    className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                   />
                 </div>
                 <div>
@@ -419,7 +419,7 @@ export default function AdminDashboard() {
             {activeTab === 'social' && (
               <div className="space-y-4">
                 <div className="flex justify-between items-center mb-4">
-                  <h3 className="text-lg font-medium">Social Links</h3>
+                  <h3 className="text-lg font-medium dark:text-gray-200">Social Links</h3>
                   <button
                     onClick={handleSocialAdd}
                     disabled={socialLinks.length >= 6}
@@ -429,29 +429,29 @@ export default function AdminDashboard() {
                   </button>
                 </div>
                 {socialLinks.length === 0 ? (
-                  <p className="text-gray-500">No social links added yet.</p>
+                  <p className="text-gray-500 dark:text-gray-400">No social links added yet.</p>
                 ) : (
                   <div className="space-y-2">
                     {socialLinks.sort((a, b) => a.order - b.order).map((link) => (
-                      <div key={link.id} className="flex items-center space-x-2 p-3 bg-gray-50 rounded">
+                      <div key={link.id} className="flex items-center space-x-2 p-3 bg-gray-50 dark:bg-gray-700 rounded">
                         <input
                           type="text"
                           value={link.label}
                           onChange={(e) => handleSocialUpdate(link.id, { label: e.target.value })}
                           placeholder="Label"
-                          className="flex-1 rounded-md border-gray-300"
+                          className="flex-1 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-100"
                         />
                         <input
                           type="url"
                           value={link.url}
                           onChange={(e) => handleSocialUpdate(link.id, { url: e.target.value })}
                           placeholder="URL"
-                          className="flex-2 rounded-md border-gray-300"
+                          className="flex-2 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-100"
                         />
                         <select
                           value={link.icon || 'link'}
                           onChange={(e) => handleSocialUpdate(link.id, { icon: e.target.value })}
-                          className="rounded-md border-gray-300"
+                          className="rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-600 dark:text-gray-100"
                         >
                           <option value="x">X</option>
                           <option value="youtube">YouTube</option>

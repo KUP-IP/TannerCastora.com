@@ -1,4 +1,4 @@
-import SocialIcon from './SocialIcon';
+import FaviconSocialIcon from './FaviconSocialIcon';
 import { SocialLink } from '@prisma/client';
 
 interface NavBarProps {
@@ -20,10 +20,10 @@ export default function NavBar({ socialLinks }: NavBarProps) {
               href={link.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-gray-700 dark:text-gray-300 hover:text-brand-blue dark:hover:text-brand-yellow transition-colors"
+              className="hover:opacity-80 transition-opacity"
               aria-label={link.label}
             >
-              <SocialIcon icon={link.icon || undefined} label={link.label} />
+              <FaviconSocialIcon url={link.url} label={link.label} icon={link.icon || undefined} />
             </a>
           ))}
         </div>

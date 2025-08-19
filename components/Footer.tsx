@@ -1,5 +1,5 @@
 import CTAButton from './CTAButton';
-import SocialIcon from './SocialIcon';
+import FaviconSocialIcon from './FaviconSocialIcon';
 import { SocialLink } from '@prisma/client';
 import Image from 'next/image';
 
@@ -29,7 +29,7 @@ export default function Footer({ amazonUrl, socialLinks }: FooterProps) {
                 className="text-gray-400 hover:text-white transition-colors"
                 aria-label={link.label}
               >
-                <SocialIcon icon={link.icon || undefined} label={link.label} />
+                <FaviconSocialIcon url={link.url} label={link.label} icon={link.icon || undefined} />
               </a>
             ))}
           </div>
