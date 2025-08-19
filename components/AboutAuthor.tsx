@@ -32,9 +32,17 @@ export default function AboutAuthor({ name, bioShort, bioFull, photoPath }: Abou
           </div>
           <div className="md:col-span-2">
             <h3 className="text-2xl font-semibold text-gray-900 mb-4">{name}</h3>
-            <p className="text-lg text-gray-700 leading-relaxed mb-4">
-              {isExpanded ? bioFull : bioShort}
-            </p>
+            <div className="text-lg text-gray-700 leading-relaxed mb-4">
+              {isExpanded ? (
+                bioFull.split('\n').map((paragraph, index) => (
+                  <p key={index} className={index > 0 ? 'mt-4' : ''}>
+                    {paragraph}
+                  </p>
+                ))
+              ) : (
+                <p>{bioShort}</p>
+              )}
+            </div>
             <button
               onClick={() => setIsExpanded(!isExpanded)}
               className="text-brand-blue hover:text-brand-blue/90 font-medium focus:outline-none focus:ring-2 focus:ring-brand-blue focus:ring-offset-2 rounded"
