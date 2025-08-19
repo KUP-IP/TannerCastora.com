@@ -40,6 +40,6 @@ next-env.d.ts
 *.db
 *.db-journal
 
-# uploads
-/public/uploads/*
+# uploads - temporarily disabled to deploy images
+# /public/uploads/*
 !/public/uploads/.gitkeep
