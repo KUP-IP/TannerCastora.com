@@ -168,18 +168,31 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleSocialUpdate = async (id: number, updates: Partial<SocialLink>) => {
+  const handleSocialUpdate = (id: number, updates: Partial<SocialLink>) => {
+    // Update local state immediately for responsive UI
+    setSocialLinks(socialLinks.map(link => 
+      link.id === id ? { ...link, ...updates } : link
+    ));
+  };
+
+  const handleSocialSave = async (id: number) => {
+    const link = socialLinks.find(l => l.id === id);
+    if (!link) return;
+    
     try {
       const res = await fetch(`/api/admin/social/${id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(updates),
+        body: JSON.stringify({
+          label: link.label,
+          url: link.url,
+          icon: link.icon,
+        }),
       });
 
       if (res.ok) {
-        setSocialLinks(socialLinks.map(link => 
-          link.id === id ? { ...link, ...updates } : link
-        ));
+        setMessage('Social link updated successfully');
+        setTimeout(() => setMessage(''), 3000);
       }
     } catch {
       setMessage('Error updating social link');
@@ -450,6 +463,12 @@ export default function AdminDashboard() {
                           <option value="rss">RSS</option>
                           <option value="link">Link</option>
                         </select>
+                        <button
+                          onClick={() => handleSocialSave(link.id)}
+                          className="px-3 py-1 bg-green-600 text-white rounded hover:bg-green-700"
+                        >
+                          Save
+                        </button>
                         <button
                           onClick={() => handleSocialDelete(link.id)}
                           className="px-3 py-1 bg-red-600 text-white rounded hover:bg-red-700"
