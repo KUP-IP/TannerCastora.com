@@ -4,6 +4,8 @@ import AboutAuthor from '@/components/AboutAuthor';
 import Footer from '@/components/Footer';
 import { prisma } from '@/lib/prisma';
 
+export const revalidate = 60; // Revalidate every 60 seconds
+
 export default async function Home() {
   const [book, author, socialLinks] = await Promise.all([
     prisma.book.findFirst(),
