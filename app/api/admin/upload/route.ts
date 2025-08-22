@@ -2,9 +2,9 @@ import { NextResponse } from 'next/server';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '@/lib/auth';
 import { prisma } from '@/lib/prisma';
+import { supabase } from '@/lib/supabase';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
-import { put } from '@vercel/blob';
 
 export async function POST(request: Request) {
   const session = await getServerSession(authOptions);
@@ -24,13 +24,53 @@ export async function POST(request: Request) {
 
     let publicUrl: string;
 
-    // Use Vercel Blob in production, local storage in development
-    if (process.env.BLOB_READ_WRITE_TOKEN) {
-      // Production: Use Vercel Blob
-      const blob = await put(file.name, file, {
-        access: 'public',
-      });
-      publicUrl = blob.url;
+    // Check if we're in production (Supabase available) or development
+    const isProduction = process.env.NODE_ENV === 'production' || process.env.SUPABASE_URL;
+
+    if (isProduction) {
+      // Production: Use Supabase Storage
+      const timestamp = Date.now();
+      const fileName = `${timestamp}-${file.name}`;
+      const filePath = `${type}/${fileName}`;
+
+      // First, ensure the bucket exists
+      const bucketName = 'uploads';
+      const { data: buckets } = await supabase.storage.listBuckets();
+      
+      if (!buckets?.find(b => b.name === bucketName)) {
+        // Create the bucket if it doesn't exist
+        const { error: createError } = await supabase.storage.createBucket(bucketName, {
+          public: true,
+          allowedMimeTypes: ['image/jpeg', 'image/png', 'image/gif', 'image/webp'],
+          fileSizeLimit: 5242880 // 5MB
+        });
+        
+        if (createError && !createError.message.includes('already exists')) {
+          console.error('Error creating bucket:', createError);
+          throw createError;
+        }
+      }
+
+      // Upload the file to Supabase Storage
+      const bytes = await file.arrayBuffer();
+      const { error } = await supabase.storage
+        .from(bucketName)
+        .upload(filePath, bytes, {
+          contentType: file.type,
+          upsert: true
+        });
+
+      if (error) {
+        console.error('Supabase upload error:', error);
+        throw error;
+      }
+
+      // Get the public URL
+      const { data: { publicUrl: url } } = supabase.storage
+        .from(bucketName)
+        .getPublicUrl(filePath);
+      
+      publicUrl = url;
     } else {
       // Development: Use local file system
       const bytes = await file.arrayBuffer();

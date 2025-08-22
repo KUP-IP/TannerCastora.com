@@ -1,14 +1,16 @@
-import CTAButton from './CTAButton';
+import PurchaseButtons from './PurchaseButtons';
 import SocialIcon from './SocialIcon';
 import { SocialLink } from '@prisma/client';
 import Image from 'next/image';
 
 interface FooterProps {
   amazonUrl: string;
+  hardcoverStripeUrl?: string | null;
+  softcoverStripeUrl?: string | null;
   socialLinks: SocialLink[];
 }
 
-export default function Footer({ amazonUrl, socialLinks }: FooterProps) {
+export default function Footer({ amazonUrl, hardcoverStripeUrl, softcoverStripeUrl, socialLinks }: FooterProps) {
   return (
     <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="max-w-4xl mx-auto text-center">
@@ -16,7 +18,13 @@ export default function Footer({ amazonUrl, socialLinks }: FooterProps) {
         <p className="text-gray-300 mb-8">
           Discover the incredible journey of South Dakota State Football
         </p>
-        <CTAButton href={amazonUrl} variant="secondary" />
+        <div className="flex justify-center">
+          <PurchaseButtons 
+            hardcoverUrl={hardcoverStripeUrl} 
+            softcoverUrl={softcoverStripeUrl}
+            amazonUrl={amazonUrl}
+          />
+        </div>
         
         {socialLinks && socialLinks.length > 0 && (
           <div className="flex justify-center items-center space-x-6 mt-8 mb-8">

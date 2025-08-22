@@ -32,6 +32,8 @@ export default async function Home() {
           description={book.description}
           coverPath={book.coverPath}
           amazonUrl={book.amazonUrl}
+          hardcoverStripeUrl={book.hardcoverStripeUrl}
+          softcoverStripeUrl={book.softcoverStripeUrl}
         />
         <AboutAuthor
           name={author.name}
@@ -40,7 +42,12 @@ export default async function Home() {
           photoPath={author.photoPath}
         />
       </main>
-      <Footer amazonUrl={book.amazonUrl} socialLinks={socialLinks} />
+      <Footer 
+        amazonUrl={book.amazonUrl} 
+        hardcoverStripeUrl={book.hardcoverStripeUrl}
+        softcoverStripeUrl={book.softcoverStripeUrl}
+        socialLinks={socialLinks} 
+      />
     </>
   );
 }

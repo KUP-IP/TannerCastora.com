@@ -10,6 +10,8 @@ interface Book {
   description: string;
   coverPath: string;
   amazonUrl: string;
+  hardcoverStripeUrl?: string | null;
+  softcoverStripeUrl?: string | null;
 }
 
 interface Author {
@@ -326,14 +328,41 @@ export default function AdminDashboard() {
                   />
                   <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">This compelling summary appears on the homepage to drive reader interest</p>
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Amazon URL</label>
-                  <input
-                    type="url"
-                    value={book.amazonUrl}
-                    onChange={(e) => setBook({ ...book, amazonUrl: e.target.value })}
-                    className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
-                  />
+                <div className="space-y-4 border-t pt-4">
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Purchase Links</h3>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Hardcover Stripe URL</label>
+                    <input
+                      type="url"
+                      value={book.hardcoverStripeUrl || ''}
+                      onChange={(e) => setBook({ ...book, hardcoverStripeUrl: e.target.value })}
+                      placeholder="https://buy.stripe.com/..."
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide hardcover button</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Softcover Stripe URL</label>
+                    <input
+                      type="url"
+                      value={book.softcoverStripeUrl || ''}
+                      onChange={(e) => setBook({ ...book, softcoverStripeUrl: e.target.value })}
+                      placeholder="https://buy.stripe.com/..."
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide softcover button</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Amazon URL</label>
+                    <input
+                      type="url"
+                      value={book.amazonUrl}
+                      onChange={(e) => setBook({ ...book, amazonUrl: e.target.value })}
+                      placeholder="https://www.amazon.com/..."
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide Amazon button (appears last, styled in black)</p>
+                  </div>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-2">Book Cover Image</label>

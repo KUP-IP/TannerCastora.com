@@ -8,13 +8,15 @@ datasource db {
 }
 
 model Book {
-  id          Int      @id @default(autoincrement())
-  title       String
-  tagline     String
-  description String   @db.Text
-  coverPath   String
-  amazonUrl   String
-  createdAt   DateTime @default(now())
+  id               Int      @id @default(autoincrement())
+  title            String
+  tagline          String
+  description      String   @db.Text
+  coverPath        String
+  amazonUrl        String   // Keeping for backwards compatibility
+  hardcoverStripeUrl String?
+  softcoverStripeUrl String?
+  createdAt        DateTime @default(now())
 }
 
 model Author {
