@@ -61,13 +61,29 @@ export default function PurchaseButtons({
 
   // If only one button, don't need flex container
   if (buttons.length === 1) {
-    return <div className={className}>{buttons[0]}</div>;
+    return (
+      <div className={className}>
+        {buttons[0]}
+        <div className="mt-4 inline-flex items-center justify-center">
+          <div className="bg-brand-yellow text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-md">
+            🚚 Pre-order for first shipment on Hobo Day, Oct. 11th!
+          </div>
+        </div>
+      </div>
+    );
   }
 
   // Multiple buttons - use flex container
   return (
-    <div className={`flex flex-col sm:flex-row gap-4 ${className}`}>
-      {buttons}
+    <div className={className}>
+      <div className="flex flex-col sm:flex-row gap-4">
+        {buttons}
+      </div>
+      <div className="mt-4 inline-flex items-center justify-center">
+        <div className="bg-brand-yellow text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-md">
+          🚚 Pre-order for first shipment on Hobo Day, Oct. 11th!
+        </div>
+      </div>
     </div>
   );
 }
