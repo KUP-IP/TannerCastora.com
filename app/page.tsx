@@ -6,6 +6,7 @@ import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic'; // Always fetch fresh data
 export const revalidate = 0; // Disable caching
+export const fetchCache = 'force-no-store'; // Force no caching
 
 export default async function Home() {
   const [book, author, socialLinks] = await Promise.all([
