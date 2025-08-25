@@ -30,6 +30,7 @@ export async function PUT(request: Request) {
       hardcoverStripeUrl: data.hardcoverStripeUrl || null,
       softcoverStripeUrl: data.softcoverStripeUrl || null,
       noteText: data.noteText || null,
+      secondaryNoteText: data.secondaryNoteText || null,
     },
   });
 

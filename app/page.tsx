@@ -35,6 +35,7 @@ export default async function Home() {
           hardcoverStripeUrl={book.hardcoverStripeUrl}
           softcoverStripeUrl={book.softcoverStripeUrl}
           noteText={book.noteText}
+          secondaryNoteText={book.secondaryNoteText}
         />
         <AboutAuthor
           name={author.name}

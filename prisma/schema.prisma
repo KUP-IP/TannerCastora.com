@@ -17,6 +17,7 @@ model Book {
   hardcoverStripeUrl String?
   softcoverStripeUrl String?
   noteText         String?  @db.Text
+  secondaryNoteText String?  @db.Text
   createdAt        DateTime @default(now())
 }
 

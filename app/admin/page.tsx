@@ -13,6 +13,7 @@ interface Book {
   hardcoverStripeUrl?: string | null;
   softcoverStripeUrl?: string | null;
   noteText?: string | null;
+  secondaryNoteText?: string | null;
 }
 
 interface Author {
@@ -368,9 +369,9 @@ export default function AdminDashboard() {
                   </div>
                 </div>
                 <div className="space-y-4 border-t pt-4">
-                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Note</h3>
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Notes</h3>
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Note Text</label>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Primary Note Text</label>
                     <input
                       type="text"
                       value={book.noteText || ''}
@@ -378,7 +379,18 @@ export default function AdminDashboard() {
                       placeholder="Optional note to display below purchase buttons (e.g., 🚚 Pre-order for first shipment...)"
                       className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
-                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide the note badge. Appears below purchase buttons with yellow background.</p>
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide. Appears with yellow background badge.</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Secondary Note Text</label>
+                    <input
+                      type="text"
+                      value={book.secondaryNoteText || ''}
+                      onChange={(e) => setBook({ ...book, secondaryNoteText: e.target.value })}
+                      placeholder="Optional subtle note (e.g., Free shipping on orders over $35)"
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide. Appears below primary note with blue text, no background.</p>
                   </div>
                 </div>
                 <div>

@@ -7,6 +7,7 @@ interface PurchaseButtonsProps {
   softcoverUrl?: string | null;
   amazonUrl?: string | null;
   noteText?: string | null;
+  secondaryNoteText?: string | null;
   className?: string;
 }
 
@@ -15,6 +16,7 @@ export default function PurchaseButtons({
   softcoverUrl,
   amazonUrl,
   noteText,
+  secondaryNoteText,
   className = ''
 }: PurchaseButtonsProps) {
   // Count how many URLs are provided
@@ -67,9 +69,16 @@ export default function PurchaseButtons({
       <div className={className}>
         {buttons[0]}
         {noteText && (
-          <div className="mt-4 inline-flex items-center justify-center">
+          <div className="mt-4 flex justify-center">
             <div className="bg-brand-yellow text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-md">
               {noteText}
+            </div>
+          </div>
+        )}
+        {secondaryNoteText && (
+          <div className="mt-4 flex justify-center">
+            <div className="text-brand-blue text-sm">
+              {secondaryNoteText}
             </div>
           </div>
         )}
@@ -84,9 +93,16 @@ export default function PurchaseButtons({
         {buttons}
       </div>
       {noteText && (
-        <div className="mt-4 inline-flex items-center justify-center">
+        <div className="mt-4 flex justify-center">
           <div className="bg-brand-yellow text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-md">
             {noteText}
+          </div>
+        </div>
+      )}
+      {secondaryNoteText && (
+        <div className="mt-4 flex justify-center">
+          <div className="text-brand-blue text-sm">
+            {secondaryNoteText}
           </div>
         </div>
       )}

@@ -24,6 +24,7 @@ export default function Footer({ amazonUrl, hardcoverStripeUrl, softcoverStripeU
             softcoverUrl={softcoverStripeUrl || null}
             amazonUrl={amazonUrl}
             noteText={null}
+            secondaryNoteText={null}
           />
         </div>
         

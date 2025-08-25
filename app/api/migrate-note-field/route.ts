@@ -11,19 +11,28 @@ export async function GET() {
       console.log('Column might already exist or error adding:', error);
     }
 
-    // Verify the field exists by trying to query it
+    // Try to add the secondaryNoteText field via raw SQL
+    try {
+      await prisma.$executeRaw`ALTER TABLE "Book" ADD COLUMN IF NOT EXISTS "secondaryNoteText" TEXT`;
+      console.log('Successfully added secondaryNoteText column');
+    } catch (error) {
+      console.log('Column might already exist or error adding:', error);
+    }
+
+    // Verify the fields exist by trying to query them
     const books = await prisma.book.findMany({
       select: {
         id: true,
         title: true,
         noteText: true,
+        secondaryNoteText: true,
       }
     });
 
     return NextResponse.json({ 
       message: 'Migration completed successfully!',
       books: books.length,
-      note: 'The noteText field is now available. You can set it from the admin panel.'
+      note: 'The noteText and secondaryNoteText fields are now available. You can set them from the admin panel.'
     });
   } catch (error) {
     console.error('Migration error:', error);
