@@ -12,6 +12,7 @@ interface Book {
   amazonUrl: string;
   hardcoverStripeUrl?: string | null;
   softcoverStripeUrl?: string | null;
+  noteText?: string | null;
 }
 
 interface Author {
@@ -221,7 +222,9 @@ export default function AdminDashboard() {
   const handleSocialReorder = async (dragIndex: number, dropIndex: number) => {
     const reordered = [...socialLinks];
     const [removed] = reordered.splice(dragIndex, 1);
-    reordered.splice(dropIndex, 0, removed);
+    if (removed) {
+      reordered.splice(dropIndex, 0, removed);
+    }
     
     const updated = reordered.map((link, index) => ({
       ...link,
@@ -362,6 +365,20 @@ export default function AdminDashboard() {
                       className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                     <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide Amazon button (appears last, styled in black)</p>
+                  </div>
+                </div>
+                <div className="space-y-4 border-t pt-4">
+                  <h3 className="text-lg font-medium text-gray-900 dark:text-gray-100">Note</h3>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Note Text</label>
+                    <input
+                      type="text"
+                      value={book.noteText || ''}
+                      onChange={(e) => setBook({ ...book, noteText: e.target.value })}
+                      placeholder="Optional note to display below purchase buttons (e.g., 🚚 Pre-order for first shipment...)"
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide the note badge. Appears below purchase buttons with yellow background.</p>
                   </div>
                 </div>
                 <div>

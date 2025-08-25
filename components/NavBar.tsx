@@ -23,7 +23,7 @@ export default function NavBar({ socialLinks }: NavBarProps) {
               className="text-gray-700 dark:text-gray-300 hover:text-brand-blue dark:hover:text-brand-yellow transition-colors"
               aria-label={link.label}
             >
-              <SocialIcon icon={link.icon || undefined} label={link.label} />
+              <SocialIcon icon={link.icon || 'link'} label={link.label} />
             </a>
           ))}
         </div>

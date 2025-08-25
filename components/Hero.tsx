@@ -9,9 +9,10 @@ interface HeroProps {
   amazonUrl: string;
   hardcoverStripeUrl?: string | null;
   softcoverStripeUrl?: string | null;
+  noteText?: string | null;
 }
 
-export default function Hero({ title, tagline, coverPath, amazonUrl, hardcoverStripeUrl, softcoverStripeUrl }: HeroProps) {
+export default function Hero({ title, tagline, coverPath, amazonUrl, hardcoverStripeUrl, softcoverStripeUrl, noteText }: HeroProps) {
   return (
     <section className="bg-gradient-to-b from-transparent via-brand-blue/5 to-transparent dark:from-transparent dark:via-brand-blue/10 dark:to-transparent py-16 px-4">
       <div className="max-w-6xl mx-auto">
@@ -41,9 +42,10 @@ export default function Hero({ title, tagline, coverPath, amazonUrl, hardcoverSt
               {tagline}
             </p>
             <PurchaseButtons 
-              hardcoverUrl={hardcoverStripeUrl} 
-              softcoverUrl={softcoverStripeUrl}
+              hardcoverUrl={hardcoverStripeUrl || null} 
+              softcoverUrl={softcoverStripeUrl || null}
               amazonUrl={amazonUrl}
+              noteText={noteText || null}
             />
           </div>
         </div>

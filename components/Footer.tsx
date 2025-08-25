@@ -20,9 +20,10 @@ export default function Footer({ amazonUrl, hardcoverStripeUrl, softcoverStripeU
         </p>
         <div className="flex justify-center">
           <PurchaseButtons 
-            hardcoverUrl={hardcoverStripeUrl} 
-            softcoverUrl={softcoverStripeUrl}
+            hardcoverUrl={hardcoverStripeUrl || null} 
+            softcoverUrl={softcoverStripeUrl || null}
             amazonUrl={amazonUrl}
+            noteText={null}
           />
         </div>
         
@@ -37,7 +38,7 @@ export default function Footer({ amazonUrl, hardcoverStripeUrl, softcoverStripeU
                 className="text-gray-400 hover:text-white transition-colors"
                 aria-label={link.label}
               >
-                <SocialIcon icon={link.icon || undefined} label={link.label} />
+                <SocialIcon icon={link.icon || 'link'} label={link.label} />
               </a>
             ))}
           </div>

@@ -16,6 +16,7 @@ model Book {
   amazonUrl        String   // Keeping for backwards compatibility
   hardcoverStripeUrl String?
   softcoverStripeUrl String?
+  noteText         String?  @db.Text
   createdAt        DateTime @default(now())
 }
 

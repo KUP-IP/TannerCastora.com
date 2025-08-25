@@ -29,6 +29,7 @@ export async function PUT(request: Request) {
       amazonUrl: data.amazonUrl,
       hardcoverStripeUrl: data.hardcoverStripeUrl || null,
       softcoverStripeUrl: data.softcoverStripeUrl || null,
+      noteText: data.noteText || null,
     },
   });
 
