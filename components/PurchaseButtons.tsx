@@ -69,14 +69,14 @@ export default function PurchaseButtons({
       <div className={className}>
         {buttons[0]}
         {noteText && (
-          <div className="mt-4 flex justify-center">
+          <div className="mt-4 flex justify-start">
             <div className="bg-brand-yellow text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-md">
               {noteText}
             </div>
           </div>
         )}
         {secondaryNoteText && (
-          <div className="mt-4 flex justify-center">
+          <div className="mt-4 flex justify-start">
             <div className="text-brand-blue text-sm">
               {secondaryNoteText}
             </div>
@@ -93,14 +93,14 @@ export default function PurchaseButtons({
         {buttons}
       </div>
       {noteText && (
-        <div className="mt-4 flex justify-center">
+        <div className="mt-4 flex justify-start">
           <div className="bg-brand-yellow text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-md">
             {noteText}
           </div>
         </div>
       )}
       {secondaryNoteText && (
-        <div className="mt-4 flex justify-center">
+        <div className="mt-4 flex justify-start">
           <div className="text-brand-blue text-sm">
             {secondaryNoteText}
           </div>
