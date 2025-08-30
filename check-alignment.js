@@ -17,7 +17,7 @@ const { chromium } = require('playwright');
   
   // Check if notes exist and get their bounding boxes
   const primaryNote = await page.$('div.bg-brand-yellow');
-  const secondaryNote = await page.$('div.text-brand-blue.text-sm');
+  const secondaryNote = await page.$('div.text-brand-blue.dark\\:text-white.text-sm');
   
   if (primaryNote) {
     const primaryBox = await primaryNote.boundingBox();
@@ -51,7 +51,7 @@ const { chromium } = require('playwright');
   // Get computed styles to check alignment
   const alignmentInfo = await page.evaluate(() => {
     const primaryNote = document.querySelector('div.bg-brand-yellow');
-    const secondaryNote = document.querySelector('div.text-brand-blue.text-sm');
+    const secondaryNote = document.querySelector('div.text-brand-blue.dark\\:text-white.text-sm');
     
     const results = {};
     

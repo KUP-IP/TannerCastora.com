@@ -35,7 +35,7 @@ export default function PurchaseButtons({
       <CTAButton 
         key="hardcover"
         href={hardcoverUrl} 
-        text="Buy Hardcover" 
+        text="Order Hardcover" 
         variant="primary" 
       />
     );
@@ -46,7 +46,7 @@ export default function PurchaseButtons({
       <CTAButton 
         key="softcover"
         href={softcoverUrl} 
-        text="Buy Softcover" 
+        text="Order Softcover" 
         variant="secondary" 
       />
     );
@@ -70,14 +70,14 @@ export default function PurchaseButtons({
         {buttons[0]}
         {noteText && (
           <div className="mt-4 flex justify-start">
-            <div className="bg-brand-yellow text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-md">
+            <div className="bg-brand-yellow text-brand-blue dark:text-gray-900 px-4 py-2 rounded-full text-sm font-semibold shadow-md">
               {noteText}
             </div>
           </div>
         )}
         {secondaryNoteText && (
           <div className="mt-4 flex justify-start">
-            <div className="text-brand-blue text-sm">
+            <div className="text-brand-blue dark:text-white text-sm">
               {secondaryNoteText}
             </div>
           </div>
@@ -94,14 +94,14 @@ export default function PurchaseButtons({
       </div>
       {noteText && (
         <div className="mt-4 flex justify-start">
-          <div className="bg-brand-yellow text-brand-blue px-4 py-2 rounded-full text-sm font-semibold shadow-md">
+          <div className="bg-brand-yellow text-brand-blue dark:text-gray-900 px-4 py-2 rounded-full text-sm font-semibold shadow-md">
             {noteText}
           </div>
         </div>
       )}
       {secondaryNoteText && (
         <div className="mt-4 flex justify-start">
-          <div className="text-brand-blue text-sm">
+          <div className="text-brand-blue dark:text-white text-sm">
             {secondaryNoteText}
           </div>
         </div>

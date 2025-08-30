@@ -21,7 +21,7 @@ export default function CTAButton({
       variantStyles = 'bg-brand-blue text-white hover:bg-brand-blue/90 shadow-lg';
       break;
     case 'secondary':
-      variantStyles = 'bg-white text-brand-blue border-2 border-brand-blue hover:bg-brand-blue/5';
+      variantStyles = 'bg-white text-brand-blue border-2 border-brand-blue hover:bg-brand-blue/5 dark:hover:bg-white';
       break;
     case 'amazon':
       variantStyles = 'bg-gray-900 text-white hover:bg-gray-800 shadow-lg';
