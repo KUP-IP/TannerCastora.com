@@ -7,7 +7,7 @@ export const revalidate = 0;
 export async function GET() {
   try {
     const start = Date.now();
-    const result = await prisma.$queryRawUnsafe('select 1 as ok');
+    const result = await prisma.$queryRaw`select 1 as ok`;
     const durationMs = Date.now() - start;
 
     return NextResponse.json({
@@ -17,11 +17,12 @@ export async function GET() {
         durationMs,
       },
     });
-  } catch (error: any) {
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : 'unknown error';
     return NextResponse.json(
       {
         ok: false,
-        error: error?.message || 'unknown error',
+        error: message,
       },
       { status: 500 }
     );
