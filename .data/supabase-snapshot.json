@@ -1,0 +1,40 @@
+{
+  "Book": [
+    {
+      "id": 1,
+      "title": "Stig and The Rise of South Dakota State Football",
+      "tagline": "In 1997, South Dakota State football was your everyday Division II program. Twenty-six years later, they were Division I national champions. This is the story of coach John \"Stig\" Stiegelmeier  — the man who led the way — and the overlooked recruits who defied the odds, survived the grim transition to Division I, and steadily built a powerhouse program in the frozen plains of South Dakota. Discover how a program nobody seemed to believe in became the team nobody could beat.\n\nWith over 150 interviews with Stig, former players and coaches, this is the definitive book on SDSU Football. ",
+      "description": "From humble beginnings to national championships, \"Stig and The Rise of South Dakota State Football\" chronicles the extraordinary transformation of SDSU football under head coach John Stiegelmeier. This compelling narrative captures the grit, determination, and vision that built a championship culture in Brookings, featuring exclusive interviews, behind-the-scenes stories, and unforgettable moments that defined a program's ascent to greatness. A must-read for every Jackrabbit fan and lover of college football.",
+      "coverPath": "https://tyudmirfexpaebtnlqza.supabase.co/storage/v1/object/public/uploads/book/1756183646997-Web%20Cover.jpg",
+      "amazonUrl": "",
+      "createdAt": "2025-08-20T14:19:57.81",
+      "hardcoverStripeUrl": "https://buy.stripe.com/dRmcN58thc1qc5bgLt1B601",
+      "softcoverStripeUrl": "https://buy.stripe.com/4gMeVdeRFc1q1qx2UD1B600",
+      "noteText": "🚚 Pre-order above for FREE shipment in mid-October!",
+      "secondaryNoteText": "The book will officially launch in the days leading up to Hobo Day (Oct 11).  There will be a book signing with Coach Stig and Tanner at Cubby’s Sports Bar & Grill. Details on the exact time and day are in the works."
+    }
+  ],
+  "Author": [
+    {
+      "id": 1,
+      "name": "Tanner Castora",
+      "bioShort": "Growing up in the suburbs of Cleveland, Ohio, Tanner Castora went on to graduate from Kent State University with a degree in broadcast journalism.",
+      "bioFull": "Growing up in the suburbs of Cleveland, Ohio, Tanner Castora went on to graduate from Kent State University with a degree in broadcast journalism.\n\nIn 2021, he was hired by KELOLAND — the CBS affiliate in Sioux Falls, South Dakota — where he became an Emmy nominated sports reporter and anchor. Since finishing his two-year contract with KELOLAND in 2023, he has worked to establish himself as an independent/freelance journalist and broadcaster.\n\nWith thousands of followers on his X and Medium page (an online publishing platform), Tanner has been credentialed to cover several events as an independent journalist, including the Men's 2024 NCAA Tournament in Omaha, Nebraska, and the 2024 NFL Hall of Fame Game in Canton, Ohio. He also has does play-by-play work for Big Sioux Media and hosts a weekly sports show on Brookings radio (The Ranch AM 910)\n\nTanner is a follower of Jesus Christ.",
+      "photoPath": "/uploads/1755543196134-Tanner-47.jpg"
+    }
+  ],
+  "SocialLink": [
+    {"id": 2, "label": "Tanner’s X", "url": "https://x.com/Tanner_Castora", "icon": "x", "order": 1},
+    {"id": 7, "label": "Tanner Medium page ", "url": "https://medium.com/@Tannercastora", "icon": "medium", "order": 1}
+  ],
+  "Asset": [],
+  "User": [
+    {
+      "id": 1,
+      "email": "admin@tannercastora.com",
+      "passwordHash": "$2b$10$DlCxuIFxQMhy5cFwivMxxuVbMwmxe6YneRzgUARjzTwjiIA.h04gi",
+      "role": "admin",
+      "createdAt": "2025-08-20T14:19:58.027"
+    }
+  ]
+}

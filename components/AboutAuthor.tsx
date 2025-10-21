@@ -16,6 +16,24 @@ export default function AboutAuthor({ name, bioShort, bioFull, photoPath }: Abou
   return (
     <section className="py-16 px-4 bg-gray-50">
       <div className="max-w-4xl mx-auto">
+        <div className="mb-10">
+          <h4 className="text-xl font-semibold text-gray-900 mb-3 text-center">
+            Listen to Tanner’s radio show “The Jackrabbit Jump” on Spotify
+          </h4>
+          <div className="rounded-xl overflow-hidden max-w-xl mx-auto">
+            <iframe
+              title="Spotify – The Jackrabbit Jump"
+              style={{ borderRadius: '12px' }}
+              src="https://open.spotify.com/embed/show/4gBD5ixBICqjX6I3DOMhuy?utm_source=generator"
+              width="100%"
+              height="152"
+              frameBorder="0"
+              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+              loading="lazy"
+              allowFullScreen
+            />
+          </div>
+        </div>
         <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-900 mb-12">
           About the Author
         </h2>

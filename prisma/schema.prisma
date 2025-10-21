@@ -5,6 +5,8 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
+  // Use direct (non-pooled) connection for migrations and long-running operations
+  directUrl = env("POSTGRES_URL_NON_POOLING")
 }
 
 model Book {
