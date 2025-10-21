@@ -4,13 +4,15 @@ const globalForPrisma = globalThis as unknown as {
   prisma: PrismaClient | undefined;
 };
 
-// Prefer Prisma Accelerate/Data Proxy, then pooled, then direct non-pooled
+// Prefer Prisma Accelerate/Data Proxy, then direct (non-pooled), then pooled
 const candidateUrls = [
-  process.env.POSTGRES_PRISMA_URL, // prisma:// Accelerate/Data Proxy
-  process.env.DATABASE_URL,       // often pooled DSN
-  process.env.POSTGRES_URL,       // pooled DSN
-  process.env.POSTGRES_URL_NON_POOLING, // direct DSN
-];
+  process.env.POSTGRES_PRISMA_URL && process.env.POSTGRES_PRISMA_URL.startsWith('prisma://')
+    ? process.env.POSTGRES_PRISMA_URL
+    : undefined,
+  process.env.POSTGRES_URL_NON_POOLING, // direct DSN (5432)
+  process.env.DATABASE_URL,             // often pooled DSN (pgBouncer 6543)
+  process.env.POSTGRES_URL,             // pooled DSN
+].filter(Boolean) as string[];
 
 const selectedUrl = candidateUrls.find(Boolean);
 
@@ -25,13 +27,14 @@ console.log('🔍 Prisma Database Connection Debug:', {
   hasPostgresUrl: !!process.env.POSTGRES_URL,
   hasPostgresPrismaUrl: !!process.env.POSTGRES_PRISMA_URL,
   hasNonPoolingUrl: !!process.env.POSTGRES_URL_NON_POOLING,
-  selectedSource: process.env.POSTGRES_PRISMA_URL
-    ? 'POSTGRES_PRISMA_URL'
-    : process.env.DATABASE_URL
-    ? 'DATABASE_URL'
-    : process.env.POSTGRES_URL
-    ? 'POSTGRES_URL'
-    : 'POSTGRES_URL_NON_POOLING',
+  selectedSource:
+    (candidateUrls[0] === process.env.POSTGRES_PRISMA_URL && process.env.POSTGRES_PRISMA_URL?.startsWith('prisma://'))
+      ? 'POSTGRES_PRISMA_URL (accelerate)'
+      : candidateUrls[0] === process.env.POSTGRES_URL_NON_POOLING
+      ? 'POSTGRES_URL_NON_POOLING'
+      : candidateUrls[0] === process.env.DATABASE_URL
+      ? 'DATABASE_URL'
+      : 'POSTGRES_URL',
   selectedUrlStart: selectedUrl.substring(0, 50) + '...',
 });
 
