@@ -9,7 +9,7 @@ interface CTAButtonProps {
 
 export default function CTAButton({
   href,
-  text = 'Buy on Amazon',
+  text = 'Order Kindle E-Book',
   variant = 'primary',
   className = '',
 }: CTAButtonProps) {

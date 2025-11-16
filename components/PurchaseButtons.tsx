@@ -57,7 +57,7 @@ export default function PurchaseButtons({
       <CTAButton 
         key="amazon"
         href={amazonUrl} 
-        text="Buy on Amazon" 
+        text="Order Kindle E-Book" 
         variant="amazon" 
       />
     );
