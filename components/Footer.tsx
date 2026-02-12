@@ -7,10 +7,12 @@ interface FooterProps {
   amazonUrl: string;
   hardcoverStripeUrl?: string | null;
   softcoverStripeUrl?: string | null;
+  hardcoverSignedUrl?: string | null;
+  softcoverSignedUrl?: string | null;
   socialLinks: SocialLink[];
 }
 
-export default function Footer({ amazonUrl, hardcoverStripeUrl, softcoverStripeUrl, socialLinks }: FooterProps) {
+export default function Footer({ amazonUrl, hardcoverStripeUrl, softcoverStripeUrl, hardcoverSignedUrl, softcoverSignedUrl, socialLinks }: FooterProps) {
   return (
     <footer className="bg-gray-900 text-white py-12 px-4">
       <div className="max-w-4xl mx-auto text-center">
@@ -19,15 +21,17 @@ export default function Footer({ amazonUrl, hardcoverStripeUrl, softcoverStripeU
           Discover the incredible journey of South Dakota State Football
         </p>
         <div className="flex justify-center">
-          <PurchaseButtons 
-            hardcoverUrl={hardcoverStripeUrl || null} 
+          <PurchaseButtons
+            hardcoverUrl={hardcoverStripeUrl || null}
             softcoverUrl={softcoverStripeUrl || null}
+            hardcoverSignedUrl={hardcoverSignedUrl || null}
+            softcoverSignedUrl={softcoverSignedUrl || null}
             amazonUrl={amazonUrl}
             noteText={null}
             secondaryNoteText={null}
           />
         </div>
-        
+
         {socialLinks && socialLinks.length > 0 && (
           <div className="flex justify-center items-center space-x-6 mt-8 mb-8">
             {socialLinks.map((link) => (
@@ -44,7 +48,7 @@ export default function Footer({ amazonUrl, hardcoverStripeUrl, softcoverStripeU
             ))}
           </div>
         )}
-        
+
         <div className="border-t border-gray-800 pt-8 mt-8">
           <div className="flex items-center justify-center gap-3">
             <a href="https://kup.solutions" target="_blank" rel="noopener noreferrer" aria-label="Visit kup.solutions">

@@ -9,11 +9,13 @@ interface HeroProps {
   amazonUrl: string;
   hardcoverStripeUrl?: string | null;
   softcoverStripeUrl?: string | null;
+  hardcoverSignedUrl?: string | null;
+  softcoverSignedUrl?: string | null;
   noteText?: string | null;
   secondaryNoteText?: string | null;
 }
 
-export default function Hero({ title, tagline, coverPath, amazonUrl, hardcoverStripeUrl, softcoverStripeUrl, noteText, secondaryNoteText }: HeroProps) {
+export default function Hero({ title, tagline, coverPath, amazonUrl, hardcoverStripeUrl, softcoverStripeUrl, hardcoverSignedUrl, softcoverSignedUrl, noteText, secondaryNoteText }: HeroProps) {
   return (
     <section className="bg-gradient-to-b from-transparent via-brand-blue/5 to-transparent dark:from-transparent dark:via-brand-blue/10 dark:to-transparent py-16 px-4">
       <div className="max-w-6xl mx-auto">
@@ -42,9 +44,11 @@ export default function Hero({ title, tagline, coverPath, amazonUrl, hardcoverSt
             <p className="text-lg md:text-xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
               {tagline}
             </p>
-            <PurchaseButtons 
-              hardcoverUrl={hardcoverStripeUrl || null} 
+            <PurchaseButtons
+              hardcoverUrl={hardcoverStripeUrl || null}
               softcoverUrl={softcoverStripeUrl || null}
+              hardcoverSignedUrl={hardcoverSignedUrl || null}
+              softcoverSignedUrl={softcoverSignedUrl || null}
               amazonUrl={amazonUrl}
               noteText={noteText || null}
               secondaryNoteText={secondaryNoteText || null}

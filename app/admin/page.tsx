@@ -12,6 +12,8 @@ interface Book {
   amazonUrl: string;
   hardcoverStripeUrl?: string | null;
   softcoverStripeUrl?: string | null;
+  hardcoverSignedStripeUrl?: string | null;
+  softcoverSignedStripeUrl?: string | null;
   noteText?: string | null;
   secondaryNoteText?: string | null;
 }
@@ -114,7 +116,7 @@ export default function AdminDashboard() {
   const handleImageUpload = async (file: File, type: 'book' | 'author' | 'asset', key?: string) => {
     setIsUploading(true);
     setMessage('');
-    
+
     try {
       const formData = new FormData();
       formData.append('file', file);
@@ -128,13 +130,13 @@ export default function AdminDashboard() {
 
       if (res.ok) {
         const { url } = await res.json();
-        
+
         if (type === 'book' && book) {
           setBook({ ...book, coverPath: url });
         } else if (type === 'author' && author) {
           setAuthor({ ...author, photoPath: url });
         }
-        
+
         setMessage(`Image uploaded successfully`);
         setTimeout(() => setMessage(''), 3000);
         await fetchData(); // Refresh data
@@ -174,7 +176,7 @@ export default function AdminDashboard() {
 
   const handleSocialUpdate = (id: number, updates: Partial<SocialLink>) => {
     // Update local state immediately for responsive UI
-    setSocialLinks(socialLinks.map(link => 
+    setSocialLinks(socialLinks.map(link =>
       link.id === id ? { ...link, ...updates } : link
     ));
   };
@@ -182,7 +184,7 @@ export default function AdminDashboard() {
   const handleSocialSave = async (id: number) => {
     const link = socialLinks.find(l => l.id === id);
     if (!link) return;
-    
+
     try {
       const res = await fetch(`/api/admin/social/${id}`, {
         method: 'PUT',
@@ -226,14 +228,14 @@ export default function AdminDashboard() {
     if (removed) {
       reordered.splice(dropIndex, 0, removed);
     }
-    
+
     const updated = reordered.map((link, index) => ({
       ...link,
       order: index,
     }));
-    
+
     setSocialLinks(updated);
-    
+
     try {
       await fetch('/api/admin/social/reorder', {
         method: 'PUT',
@@ -279,31 +281,28 @@ export default function AdminDashboard() {
             <nav className="-mb-px flex">
               <button
                 onClick={() => setActiveTab('book')}
-                className={`py-2 px-6 ${
-                  activeTab === 'book'
+                className={`py-2 px-6 ${activeTab === 'book'
                     ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
                     : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
+                  }`}
               >
                 Book Details
               </button>
               <button
                 onClick={() => setActiveTab('author')}
-                className={`py-2 px-6 ${
-                  activeTab === 'author'
+                className={`py-2 px-6 ${activeTab === 'author'
                     ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
                     : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
+                  }`}
               >
                 Author Details
               </button>
               <button
                 onClick={() => setActiveTab('social')}
-                className={`py-2 px-6 ${
-                  activeTab === 'social'
+                className={`py-2 px-6 ${activeTab === 'social'
                     ? 'border-b-2 border-blue-500 text-blue-600 dark:text-blue-400'
                     : 'text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300'
-                }`}
+                  }`}
               >
                 Social Links
               </button>
@@ -355,6 +354,28 @@ export default function AdminDashboard() {
                       className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
                     />
                     <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide softcover button</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Signed Hardcover Stripe URL</label>
+                    <input
+                      type="url"
+                      value={book.hardcoverSignedStripeUrl || ''}
+                      onChange={(e) => setBook({ ...book, hardcoverSignedStripeUrl: e.target.value })}
+                      placeholder="https://buy.stripe.com/..."
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide signed hardcover button</p>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Signed Softcover Stripe URL</label>
+                    <input
+                      type="url"
+                      value={book.softcoverSignedStripeUrl || ''}
+                      onChange={(e) => setBook({ ...book, softcoverSignedStripeUrl: e.target.value })}
+                      placeholder="https://buy.stripe.com/..."
+                      className="mt-1 block w-full rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-gray-100 shadow-sm focus:border-blue-500 focus:ring-blue-500"
+                    />
+                    <p className="mt-1 text-sm text-gray-500 dark:text-gray-400">Leave empty to hide signed softcover button</p>
                   </div>
                   <div>
                     <label className="block text-sm font-medium text-gray-700 dark:text-gray-300">Amazon URL</label>

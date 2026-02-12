@@ -5,23 +5,27 @@ import CTAButton from './CTAButton';
 interface PurchaseButtonsProps {
   hardcoverUrl?: string | null;
   softcoverUrl?: string | null;
+  hardcoverSignedUrl?: string | null;
+  softcoverSignedUrl?: string | null;
   amazonUrl?: string | null;
   noteText?: string | null;
   secondaryNoteText?: string | null;
   className?: string;
 }
 
-export default function PurchaseButtons({ 
-  hardcoverUrl, 
+export default function PurchaseButtons({
+  hardcoverUrl,
   softcoverUrl,
+  hardcoverSignedUrl,
+  softcoverSignedUrl,
   amazonUrl,
   noteText,
   secondaryNoteText,
   className = ''
 }: PurchaseButtonsProps) {
   // Count how many URLs are provided
-  const urls = [hardcoverUrl, softcoverUrl, amazonUrl].filter(Boolean);
-  
+  const urls = [hardcoverUrl, softcoverUrl, hardcoverSignedUrl, softcoverSignedUrl, amazonUrl].filter(Boolean);
+
   // If no URLs are provided, don't render anything
   if (urls.length === 0) {
     return null;
@@ -29,36 +33,58 @@ export default function PurchaseButtons({
 
   // Build the buttons array
   const buttons = [];
-  
+
   if (hardcoverUrl) {
     buttons.push(
-      <CTAButton 
+      <CTAButton
         key="hardcover"
-        href={hardcoverUrl} 
-        text="Order Hardcover" 
-        variant="primary" 
+        href={hardcoverUrl}
+        text="Order Hardcover"
+        variant="primary"
       />
     );
   }
-  
+
   if (softcoverUrl) {
     buttons.push(
-      <CTAButton 
+      <CTAButton
         key="softcover"
-        href={softcoverUrl} 
-        text="Order Softcover" 
-        variant="secondary" 
+        href={softcoverUrl}
+        text="Order Softcover"
+        variant="secondary"
       />
     );
   }
-  
+
+  if (hardcoverSignedUrl) {
+    buttons.push(
+      <CTAButton
+        key="hardcover-signed"
+        href={hardcoverSignedUrl}
+        text="Order Signed Hardcover"
+        variant="primary"
+      />
+    );
+  }
+
+  if (softcoverSignedUrl) {
+    buttons.push(
+      <CTAButton
+        key="softcover-signed"
+        href={softcoverSignedUrl}
+        text="Order Signed Softcover"
+        variant="secondary"
+      />
+    );
+  }
+
   if (amazonUrl) {
     buttons.push(
-      <CTAButton 
+      <CTAButton
         key="amazon"
-        href={amazonUrl} 
-        text="Order Kindle E-Book" 
-        variant="amazon" 
+        href={amazonUrl}
+        text="Order Kindle E-Book"
+        variant="amazon"
       />
     );
   }
@@ -89,7 +115,7 @@ export default function PurchaseButtons({
   // Multiple buttons - use flex container
   return (
     <div className={className}>
-      <div className="flex flex-col sm:flex-row gap-4">
+      <div className="flex flex-wrap gap-4">
         {buttons}
       </div>
       {noteText && (

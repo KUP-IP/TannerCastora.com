@@ -19,11 +19,11 @@ async function retryDatabaseOperation<T>(
       return await operation();
     } catch (error) {
       console.log(`🔄 Database operation attempt ${attempt}/${maxRetries} failed:`, error);
-      
+
       if (attempt === maxRetries) {
         throw error;
       }
-      
+
       // Exponential backoff
       const waitTime = delay * Math.pow(2, attempt - 1);
       console.log(`⏳ Waiting ${waitTime}ms before retry...`);
@@ -44,18 +44,18 @@ export default async function Home() {
       databaseUrlStart: process.env.DATABASE_URL?.substring(0, 50) + '...',
       postgresUrlStart: process.env.POSTGRES_URL?.substring(0, 50) + '...'
     });
-    
+
     // Test database connection with retry logic
     const allBooks = await retryDatabaseOperation(() => prisma.book.findMany());
     const allAuthors = await retryDatabaseOperation(() => prisma.author.findMany());
-    
+
     console.log('🔍 Database connection test:', {
       totalBooks: allBooks.length,
       totalAuthors: allAuthors.length,
       bookIds: allBooks.map(b => b.id),
       authorIds: allAuthors.map(a => a.id)
     });
-    
+
     const [book, author, socialLinks] = await Promise.all([
       retryDatabaseOperation(() => prisma.book.findFirst()),
       retryDatabaseOperation(() => prisma.author.findFirst()),
@@ -82,36 +82,40 @@ export default async function Home() {
       );
     }
 
-  return (
-    <>
-      <NavBar socialLinks={socialLinks} />
-      <main>
-        <Hero
-          title={book.title}
-          tagline={book.tagline}
-          description={book.description}
-          coverPath={book.coverPath}
+    return (
+      <>
+        <NavBar socialLinks={socialLinks} />
+        <main>
+          <Hero
+            title={book.title}
+            tagline={book.tagline}
+            description={book.description}
+            coverPath={book.coverPath}
+            amazonUrl={book.amazonUrl}
+            hardcoverStripeUrl={book.hardcoverStripeUrl}
+            softcoverStripeUrl={book.softcoverStripeUrl}
+            hardcoverSignedUrl={book.hardcoverSignedStripeUrl}
+            softcoverSignedUrl={book.softcoverSignedStripeUrl}
+            noteText={book.noteText}
+            secondaryNoteText={book.secondaryNoteText}
+          />
+          <AboutAuthor
+            name={author.name}
+            bioShort={author.bioShort}
+            bioFull={author.bioFull}
+            photoPath={author.photoPath}
+          />
+        </main>
+        <Footer
           amazonUrl={book.amazonUrl}
           hardcoverStripeUrl={book.hardcoverStripeUrl}
           softcoverStripeUrl={book.softcoverStripeUrl}
-          noteText={book.noteText}
-          secondaryNoteText={book.secondaryNoteText}
+          hardcoverSignedUrl={book.hardcoverSignedStripeUrl}
+          softcoverSignedUrl={book.softcoverSignedStripeUrl}
+          socialLinks={socialLinks}
         />
-        <AboutAuthor
-          name={author.name}
-          bioShort={author.bioShort}
-          bioFull={author.bioFull}
-          photoPath={author.photoPath}
-        />
-      </main>
-      <Footer 
-        amazonUrl={book.amazonUrl} 
-        hardcoverStripeUrl={book.hardcoverStripeUrl}
-        softcoverStripeUrl={book.softcoverStripeUrl}
-        socialLinks={socialLinks} 
-      />
-    </>
-  );
+      </>
+    );
   } catch (error) {
     console.error('❌ Error fetching data:', error);
     return (

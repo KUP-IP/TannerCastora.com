@@ -29,6 +29,8 @@ export async function PUT(request: Request) {
       amazonUrl: data.amazonUrl,
       hardcoverStripeUrl: data.hardcoverStripeUrl || null,
       softcoverStripeUrl: data.softcoverStripeUrl || null,
+      hardcoverSignedStripeUrl: data.hardcoverSignedStripeUrl || null,
+      softcoverSignedStripeUrl: data.softcoverSignedStripeUrl || null,
       noteText: data.noteText || null,
       secondaryNoteText: data.secondaryNoteText || null,
     },
