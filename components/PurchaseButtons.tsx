@@ -56,6 +56,17 @@ export default function PurchaseButtons({
     );
   }
 
+  if (amazonUrl) {
+    buttons.push(
+      <CTAButton
+        key="amazon"
+        href={amazonUrl}
+        text="Order Kindle E-Book"
+        variant="amazon"
+      />
+    );
+  }
+
   if (hardcoverSignedUrl) {
     buttons.push(
       <CTAButton
@@ -74,17 +85,6 @@ export default function PurchaseButtons({
         href={softcoverSignedUrl}
         text="Order Signed Softcover"
         variant="secondary"
-      />
-    );
-  }
-
-  if (amazonUrl) {
-    buttons.push(
-      <CTAButton
-        key="amazon"
-        href={amazonUrl}
-        text="Order Kindle E-Book"
-        variant="amazon"
       />
     );
   }
@@ -115,7 +115,7 @@ export default function PurchaseButtons({
   // Multiple buttons - use flex container
   return (
     <div className={className}>
-      <div className="flex flex-wrap gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {buttons}
       </div>
       {noteText && (
