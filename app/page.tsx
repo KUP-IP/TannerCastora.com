@@ -8,6 +8,31 @@ export const dynamic = 'force-dynamic'; // Always fetch fresh data
 export const revalidate = 0; // Disable caching
 export const fetchCache = 'force-no-store'; // Force no caching
 
+// Retry function for database operations
+async function retryDatabaseOperation<T>(
+  operation: () => Promise<T>,
+  maxRetries: number = 3,
+  delay: number = 1000
+): Promise<T> {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      return await operation();
+    } catch (error) {
+      console.log(`🔄 Database operation attempt ${attempt}/${maxRetries} failed:`, error);
+      
+      if (attempt === maxRetries) {
+        throw error;
+      }
+      
+      // Exponential backoff
+      const waitTime = delay * Math.pow(2, attempt - 1);
+      console.log(`⏳ Waiting ${waitTime}ms before retry...`);
+      await new Promise(resolve => setTimeout(resolve, waitTime));
+    }
+  }
+  throw new Error('All retry attempts failed');
+}
+
 export default async function Home() {
   try {
     console.log('🔄 Fetching data at runtime...');
@@ -20,9 +45,9 @@ export default async function Home() {
       postgresUrlStart: process.env.POSTGRES_URL?.substring(0, 50) + '...'
     });
     
-    // Test database connection by getting all records
-    const allBooks = await prisma.book.findMany();
-    const allAuthors = await prisma.author.findMany();
+    // Test database connection with retry logic
+    const allBooks = await retryDatabaseOperation(() => prisma.book.findMany());
+    const allAuthors = await retryDatabaseOperation(() => prisma.author.findMany());
     
     console.log('🔍 Database connection test:', {
       totalBooks: allBooks.length,
@@ -32,9 +57,9 @@ export default async function Home() {
     });
     
     const [book, author, socialLinks] = await Promise.all([
-      prisma.book.findFirst(),
-      prisma.author.findFirst(),
-      prisma.socialLink.findMany({ orderBy: { order: 'asc' } }),
+      retryDatabaseOperation(() => prisma.book.findFirst()),
+      retryDatabaseOperation(() => prisma.author.findFirst()),
+      retryDatabaseOperation(() => prisma.socialLink.findMany({ orderBy: { order: 'asc' } })),
     ]);
 
     console.log('✅ Data fetched successfully:', {
