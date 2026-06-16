@@ -2,7 +2,6 @@ import {
   Section,
   SectionLabel,
   SectionHeading,
-  Placeholder,
 } from "@/components/site/section";
 import { CtaLink } from "@/components/site/cta";
 import { book } from "@/lib/site";
@@ -18,10 +17,13 @@ export function Book() {
   return (
     <Section id="book" width="wide">
       <div className="grid gap-12 md:grid-cols-[0.7fr_1.3fr] md:items-center md:gap-16">
-        {/* Book cover stand-in — typographic placeholder until a cover image is supplied. */}
-        <Placeholder
-          label="Stig (2025)"
-          className="aspect-[2/3] w-full max-w-[240px] justify-self-center md:justify-self-start"
+        {/* Book cover — real jacket art pulled from Tanner's prior site. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/media/book-cover.png"
+          alt="Stig and the Rise of South Dakota State Football — book cover"
+          loading="lazy"
+          className="w-full max-w-[240px] justify-self-center rounded-lg border border-border shadow-lg md:justify-self-start"
         />
 
         <div>
