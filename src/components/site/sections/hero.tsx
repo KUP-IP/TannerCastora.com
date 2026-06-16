@@ -1,42 +1,36 @@
 import { site } from "@/lib/site";
 import { CtaLink } from "@/components/site/cta";
+import { HeroVideo } from "@/components/site/hero-video";
 
 /**
- * Hero — section 1 of the person-first flow. THE signature moment.
+ * Hero — section 1 and THE signature moment (Tanner's favorite of the Smith
+ * reference: "the video at the start").
  *
- * TCX.4 wires the actual time-lapse video (autoplay, muted, looped, poster
- * fallback). For now the video frame is a clearly-labeled placeholder so the
- * layout and the name/positioning/CTA above-the-fold are real and reviewable.
+ * The video treatment is centralized in <HeroVideo>; TCX.4 supplies src/poster.
+ * Above the scrim: a serif name lockup, one positioning line, and the primary
+ * pair of CTAs (Get in touch + Watch the reel) — the "let's talk" payloads.
  */
 export function Hero() {
   return (
     <section
       id="hero"
-      className="relative flex min-h-[88vh] w-full items-center justify-center overflow-hidden scroll-mt-20"
+      className="relative flex min-h-[92vh] w-full items-center justify-center overflow-hidden scroll-mt-24"
     >
-      {/* PLACEHOLDER hero media — TCX.4 replaces with the autoplay time-lapse video + poster. */}
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-b from-muted via-background to-background"
-      />
-      <div
-        aria-hidden
-        className="absolute inset-0 -z-10 flex items-center justify-center"
-      >
-        <span className="rounded-full border border-dashed border-border/70 px-4 py-1.5 text-xs uppercase tracking-widest text-muted-foreground/70">
-          Hero video — wired in TCX.4
-        </span>
-      </div>
+      {/* PLACEHOLDER hero media — TCX.4 passes src + poster to <HeroVideo>. */}
+      <HeroVideo />
 
       <div className="mx-auto w-full max-w-3xl px-6 text-center sm:px-8">
-        <h1 className="text-balance text-4xl font-semibold tracking-tight sm:text-6xl">
+        <p className="reveal reveal-1 eyebrow mb-6 justify-center text-muted-foreground">
+          Cleveland, OH · Available now
+        </p>
+        <h1 className="reveal reveal-2 font-display text-5xl font-medium leading-[0.98] tracking-[-0.02em] text-balance sm:text-7xl md:text-8xl">
           {site.name}
         </h1>
-        <p className="mx-auto mt-5 max-w-xl text-balance text-lg text-muted-foreground sm:text-xl">
+        <p className="reveal reveal-3 mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
           {/* PLACEHOLDER positioning line — final copy in TCX.3 (Tanner's voice). */}
           {site.tagline}.
         </p>
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <div className="reveal reveal-4 mt-10 flex flex-wrap items-center justify-center gap-3">
           <CtaLink href="#contact" size="lg" className="rounded-full">
             Get in touch
           </CtaLink>

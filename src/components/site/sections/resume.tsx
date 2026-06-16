@@ -1,4 +1,9 @@
-import { Section, SectionLabel } from "@/components/site/section";
+import {
+  Section,
+  SectionLabel,
+  SectionHeading,
+  SectionLead,
+} from "@/components/site/section";
 import { CtaLink } from "@/components/site/cta";
 
 /**
@@ -10,17 +15,16 @@ import { CtaLink } from "@/components/site/cta";
  */
 export function Resume() {
   return (
-    <Section id="resume" className="bg-muted/30">
+    <Section id="resume" className="bg-accent/30">
       <SectionLabel>Resume</SectionLabel>
-      <h2 className="text-3xl font-semibold tracking-tight sm:text-4xl">
-        The resume
-      </h2>
-      <p className="mt-4 text-lg text-muted-foreground">
+      <SectionHeading>The resume</SectionHeading>
+      <SectionLead className="mt-5">
         {/* PLACEHOLDER copy — TCX.3. */}
-        View or download the full resume — experience, stations, and credits.
-      </p>
+        View or download the full resume — experience, stations, and credits, in
+        one tap.
+      </SectionLead>
 
-      <div className="mt-8 flex flex-wrap gap-3">
+      <div className="mt-9 flex flex-wrap gap-3">
         {/* PLACEHOLDER links — TCX.4 points these at the real PDF in /public. */}
         <CtaLink href="#resume" size="lg" className="rounded-full">
           View resume (PDF — TCX.4)

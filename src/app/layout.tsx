@@ -1,16 +1,33 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Fraunces } from "next/font/google";
 import "./globals.css";
 import { SITE_URL, site } from "@/lib/site";
 
+/**
+ * Typography (TCX.2 design system):
+ *   - Display: Fraunces — a characterful "old-style" serif with optical sizing,
+ *     carrying on-air editorial gravitas + warmth on headings.
+ *   - Body: Geist Sans — a clean, trustworthy grotesque for legible reading.
+ *   - Mono: Geist Mono — incidental UI / labels.
+ * All loaded with `display: "swap"` so the hero never blocks on a webfont.
+ */
 const geistSans = Geist({
   variable: "--font-sans",
   subsets: ["latin"],
+  display: "swap",
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+  variable: "--font-mono",
   subsets: ["latin"],
+  display: "swap",
+});
+
+const fraunces = Fraunces({
+  variable: "--font-display",
+  subsets: ["latin"],
+  display: "swap",
+  axes: ["opsz", "SOFT"],
 });
 
 /**
@@ -74,7 +91,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}

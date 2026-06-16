@@ -4,127 +4,217 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================================
+   TannerCastora.com — DESIGN SYSTEM (TCX.2)
+   Visual direction: "Anchor Desk Editorial" — editorial, warm, trustworthy,
+   video-forward. Built to the vj-smith.com quality bar: calm, restrained,
+   photo/video-led, with one accent and generous whitespace.
+
+   This file is the SINGLE SOURCE OF TRUTH for design tokens. Theme centrally
+   here (color, type, spacing, radius, motion) — never one-off styles per page.
+   Full rationale: /DESIGN.md
+   ========================================================================== */
+
 @theme inline {
+  /* --- Color tokens (consumed by shadcn components) --- */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* --- Brand accent (broadcast blue) — used sparingly per the Smith bar --- */
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+
+  /* --- Typography: distinctive serif display + clean grotesque body --- */
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-display: var(--font-display);
+  --font-heading: var(--font-display);
+
+  /* --- Editorial type scale (fluid where it earns it) --- */
+  --text-eyebrow: 0.78rem;
+  --text-eyebrow--line-height: 1.2;
+  --text-eyebrow--letter-spacing: 0.18em;
+
+  /* --- Radius scale --- */
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.75);
   --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-xl: calc(var(--radius) * 1.5);
+  --radius-2xl: calc(var(--radius) * 2);
+  --radius-3xl: calc(var(--radius) * 2.6);
+
+  /* --- Motion language: calm, editorial, ease-out --- */
+  --ease-editorial: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-soft: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 180ms;
+  --duration-base: 320ms;
+  --duration-slow: 560ms;
 }
 
+/* ============================================================================
+   LIGHT THEME (default) — warm paper, near-black ink, one broadcast-blue accent
+   Contrast verified AA: ink #1a1815 on paper #faf8f5, muted #5c574f on paper.
+   ========================================================================== */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
+  /* Warm paper, not pure white — softer, more editorial than the Wix-white ref */
+  --background: oklch(0.985 0.004 85);
+  --foreground: oklch(0.205 0.008 75);
+
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
+  --card-foreground: oklch(0.205 0.008 75);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --popover-foreground: oklch(0.205 0.008 75);
+
+  /* Ink — warm near-black for headings + primary buttons */
+  --primary: oklch(0.215 0.008 75);
+  --primary-foreground: oklch(0.985 0.004 85);
+
+  --secondary: oklch(0.95 0.006 80);
+  --secondary-foreground: oklch(0.245 0.008 75);
+
+  --muted: oklch(0.955 0.005 80);
+  --muted-foreground: oklch(0.475 0.01 70);
+
+  /* Accent surfaces (subtle warm tint) */
+  --accent: oklch(0.93 0.012 75);
+  --accent-foreground: oklch(0.245 0.008 75);
+
+  /* Broadcast blue — the ONE accent. Used for links/focus/small emphasis only. */
+  --brand: oklch(0.52 0.13 245);
+  --brand-foreground: oklch(0.985 0.004 85);
+
+  --destructive: oklch(0.55 0.2 27);
+  --border: oklch(0.9 0.006 80);
+  --input: oklch(0.9 0.006 80);
+  --ring: oklch(0.52 0.13 245);
+
+  --radius: 0.5rem;
 }
 
+/* ============================================================================
+   DARK THEME — "studio at night": deep warm charcoal, paper-light ink.
+   Present + consistent, though the site ships light-first (Smith is light).
+   ========================================================================== */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
+  --background: oklch(0.185 0.006 70);
+  --foreground: oklch(0.96 0.004 85);
+
+  --card: oklch(0.225 0.006 70);
+  --card-foreground: oklch(0.96 0.004 85);
+  --popover: oklch(0.225 0.006 70);
+  --popover-foreground: oklch(0.96 0.004 85);
+
+  --primary: oklch(0.96 0.004 85);
+  --primary-foreground: oklch(0.205 0.006 70);
+
+  --secondary: oklch(0.27 0.006 70);
+  --secondary-foreground: oklch(0.96 0.004 85);
+
+  --muted: oklch(0.27 0.006 70);
+  --muted-foreground: oklch(0.72 0.008 75);
+
+  --accent: oklch(0.3 0.008 70);
+  --accent-foreground: oklch(0.96 0.004 85);
+
+  --brand: oklch(0.68 0.13 245);
+  --brand-foreground: oklch(0.185 0.006 70);
+
+  --destructive: oklch(0.65 0.19 25);
+  --border: oklch(1 0 0 / 12%);
   --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --ring: oklch(0.68 0.13 245);
 }
 
+/* ============================================================================
+   BASE LAYER
+   ========================================================================== */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
+  html {
+    @apply font-sans antialiased;
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
   body {
     @apply bg-background text-foreground;
+    font-feature-settings: "kern", "liga", "calt";
   }
-  html {
-    @apply font-sans;
+
+  /* Display font owns the headings — serif gravitas, optical sizing on. */
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display), Georgia, "Times New Roman", serif;
+    font-optical-sizing: auto;
+  }
+
+  /* Selection in the broadcast accent */
+  ::selection {
+    background-color: color-mix(in oklch, var(--brand) 22%, transparent);
+    color: var(--foreground);
+  }
+
+  /* Respect reduced-motion globally — calm by default, still by request. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+/* ============================================================================
+   DESIGN-SYSTEM UTILITIES (shared, central — used by section shells)
+   ========================================================================== */
+@layer components {
+  /* Editorial eyebrow / kicker above section headings */
+  .eyebrow {
+    @apply inline-flex items-center text-[length:var(--text-eyebrow)] font-semibold uppercase text-muted-foreground;
+    letter-spacing: var(--text-eyebrow--letter-spacing);
+  }
+
+  /* A short accent rule that pairs with the eyebrow (broadcast tick mark) */
+  .accent-rule {
+    @apply inline-block h-px w-8 align-middle;
+    background-color: var(--brand);
+  }
+
+  /* Calm staggered reveal on load — one well-orchestrated entrance. */
+  .reveal {
+    opacity: 0;
+    transform: translateY(12px);
+    animation: reveal-up var(--duration-slow) var(--ease-editorial) forwards;
+  }
+  .reveal-1 { animation-delay: 0.05s; }
+  .reveal-2 { animation-delay: 0.15s; }
+  .reveal-3 { animation-delay: 0.25s; }
+  .reveal-4 { animation-delay: 0.35s; }
+
+  @keyframes reveal-up {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
