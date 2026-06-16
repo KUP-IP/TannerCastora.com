@@ -42,3 +42,6 @@ next-env.d.ts
 
 # claude code MCP config (contains secrets)
 .mcp.json
+
+# archived old site (not part of the build)
+/archive
