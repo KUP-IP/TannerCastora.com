@@ -18,9 +18,9 @@ export function Book() {
   return (
     <Section id="book" width="wide">
       <div className="grid gap-12 md:grid-cols-[0.7fr_1.3fr] md:items-center md:gap-16">
-        {/* Book cover placeholder — real image in TCX.4. */}
+        {/* Book cover stand-in — typographic placeholder until a cover image is supplied. */}
         <Placeholder
-          label="Book cover — TCX.4"
+          label="Stig (2025)"
           className="aspect-[2/3] w-full max-w-[240px] justify-self-center md:justify-self-start"
         />
 

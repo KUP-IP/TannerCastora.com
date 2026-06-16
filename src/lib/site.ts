@@ -15,7 +15,10 @@
 // Canonical domain confirmed by operator: tannercastora.com (WITH the "a").
 // Drives metadataBase + canonical/OG URLs. DNS cutover timing is operator-owned;
 // metadata only — no Vercel domain or DNS changes are made here.
-export const SITE_URL = "https://tannercastora.com";
+// Preview deploys pass NEXT_PUBLIC_SITE_URL=<preview-url> at build so the OG/share
+// card resolves on the preview; production (canonical domain) uses the default.
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://tannercastora.com";
 
 export const site = {
   name: "Tanner Castora",
