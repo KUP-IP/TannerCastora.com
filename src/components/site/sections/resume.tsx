@@ -5,6 +5,7 @@ import {
   SectionLead,
 } from "@/components/site/section";
 import { CtaLink } from "@/components/site/cta";
+import { site } from "@/lib/site";
 
 /**
  * Resume — section 5: on-page highlights + PDF view/download. The second
@@ -65,17 +66,26 @@ export function Resume() {
       </ul>
 
       <div className="mt-9 flex flex-wrap gap-3">
-        {/* PLACEHOLDER links — TCX.4 points these at the real PDF in /public. */}
-        <CtaLink href="#resume" size="lg" className="rounded-full">
-          View resume (PDF — TCX.4)
+        {/* Real PDF served from /public (TCX.4). View opens in a new tab —
+            the mobile-safe fallback, since iOS Safari renders PDFs inline
+            there rather than forcing a download. */}
+        <CtaLink
+          href={site.resumePdf}
+          size="lg"
+          className="rounded-full"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View resume (PDF)
         </CtaLink>
         <CtaLink
-          href="#resume"
+          href={site.resumePdf}
           size="lg"
           variant="outline"
           className="rounded-full"
+          download="Tanner-Castora-Resume.pdf"
         >
-          Download PDF (TCX.4)
+          Download PDF
         </CtaLink>
       </div>
     </Section>

@@ -3,17 +3,18 @@ import {
   SectionLabel,
   SectionHeading,
   SectionLead,
-  Placeholder,
 } from "@/components/site/section";
 import { CtaLink } from "@/components/site/cta";
+import { YouTubeFacade } from "@/components/site/youtube-facade";
 import { site } from "@/lib/site";
 
 /**
  * Broadcasting — section 4: the reel. One of the two "let's talk" payloads
  * (reel + resume), reachable in one tap from the hero CTA.
  *
- * Copy is real (TCX.3). The embedded click-to-play player is wired in TCX.4;
- * until then the reel is one tap away via the YouTube link below.
+ * Copy is real (TCX.3). The reel is Tanner's canonical 2026 YouTube reel, wired
+ * (TCX.4) as a lightweight click-to-play façade: thumbnail only on first paint,
+ * the real player mounts on click — never autoplays, never taxes mobile load.
  */
 export function Broadcasting() {
   return (
@@ -39,10 +40,10 @@ export function Broadcasting() {
         </div>
       </div>
 
-      {/* Embedded click-to-play player is wired in TCX.4. */}
-      <Placeholder
-        media
-        label="Broadcasting reel · embedded player wired in TCX.4 — watch now via the YouTube link above"
+      {/* Click-to-play reel — façade loads only the thumbnail until pressed. */}
+      <YouTubeFacade
+        videoId={site.youtubeReelId}
+        title="Tanner Castora — 2026 Broadcasting Reel"
         className="mt-10 aspect-video w-full"
       />
     </Section>

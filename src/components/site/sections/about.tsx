@@ -3,7 +3,6 @@ import {
   SectionLabel,
   SectionHeading,
   SectionLead,
-  Placeholder,
 } from "@/components/site/section";
 import { bio, credentials } from "@/lib/site";
 
@@ -17,10 +16,14 @@ export function About() {
   return (
     <Section id="about" width="wide">
       <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-start md:gap-16">
-        {/* Portrait placeholder — real photo in TCX.4. */}
-        <Placeholder
-          label="Portrait photo — TCX.4"
-          className="aspect-[4/5] w-full md:sticky md:top-28"
+        {/* Portrait (TCX.4) — Tanner's headshot, optimized and served from the
+            repo. Lazy + fixed aspect frame so it never shifts layout. */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/media/portrait.jpg"
+          alt="Tanner Castora"
+          loading="lazy"
+          className="aspect-[4/5] w-full rounded-2xl border border-border object-cover object-top md:sticky md:top-28"
         />
 
         <div>

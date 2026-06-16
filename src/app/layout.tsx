@@ -31,10 +31,11 @@ const fraunces = Fraunces({
 });
 
 /**
- * SEO + share scaffolding (TCX.1 DoD).
+ * SEO + share scaffolding (TCX.1 DoD; media landed in TCX.4).
  * Person-first title, meta description, Open Graph + Twitter card, favicon.
- * OG image is a PLACEHOLDER path — TCX.4 drops the real share image (Tanner's
- * photo) at /og.png; until then the file is absent and clients fall back gracefully.
+ * The OG image at /public/og.png is now Tanner's real headshot (1200×630) — the
+ * link preview when the site is texted or emailed. Favicon/app icons are
+ * auto-wired from src/app/{favicon.ico,icon.png,apple-icon.png}.
  * metadataBase uses the confirmed canonical domain (TannerCastora.com, with the
  * "a") but DNS is held pending cutover — preview deploys still resolve fine.
  */
@@ -64,7 +65,7 @@ export const metadata: Metadata = {
     description: site.description,
     images: [
       {
-        url: "/og.png", // TODO (TCX.4): real OG image with Tanner's photo
+        url: "/og.png", // Tanner's headshot, 1200×630 (TCX.4)
         width: 1200,
         height: 630,
         alt: site.title,
@@ -75,11 +76,12 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: site.title,
     description: site.description,
-    images: ["/og.png"], // TODO (TCX.4)
+    images: ["/og.png"],
   },
-  icons: {
-    icon: "/favicon.ico",
-  },
+  // Icons (favicon.ico + icon.png + apple-icon.png) are auto-wired by the
+  // App Router file convention from src/app/* (TCX.4 dropped Tanner's headshot
+  // crops there), so no explicit `icons` block is needed — and an explicit one
+  // would suppress the modern PNG + apple-touch variants.
   robots: { index: true, follow: true },
 };
 

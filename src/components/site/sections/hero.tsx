@@ -6,7 +6,8 @@ import { HeroVideo } from "@/components/site/hero-video";
  * Hero — section 1 and THE signature moment (Tanner's favorite of the Smith
  * reference: "the video at the start").
  *
- * The video treatment is centralized in <HeroVideo>; TCX.4 supplies src/poster.
+ * The video treatment is centralized in <HeroVideo>; TCX.4 supplies the real
+ * web-optimized sources + poster.
  * Above the scrim: a serif name lockup, one positioning line, and the primary
  * pair of CTAs (Get in touch + Watch the reel) — the "let's talk" payloads.
  */
@@ -16,8 +17,16 @@ export function Hero() {
       id="hero"
       className="relative flex min-h-[92vh] w-full items-center justify-center overflow-hidden scroll-mt-24"
     >
-      {/* PLACEHOLDER hero media — TCX.4 passes src + poster to <HeroVideo>. */}
-      <HeroVideo />
+      {/* Hero media (TCX.4): web-optimized 720p time-lapse — webm first
+          (smaller), mp4 fallback for Safari/iOS — over a poster that paints
+          instantly so the hero never blocks first paint. */}
+      <HeroVideo
+        poster="/media/hero-poster.jpg"
+        src={[
+          { url: "/media/hero.webm", type: "video/webm" },
+          { url: "/media/hero.mp4", type: "video/mp4" },
+        ]}
+      />
 
       <div className="mx-auto w-full max-w-3xl px-6 text-center sm:px-8">
         <p className="reveal reveal-1 eyebrow mb-6 justify-center text-muted-foreground">

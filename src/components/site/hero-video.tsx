@@ -4,44 +4,64 @@ import { cn } from "@/lib/utils";
  * HeroVideo (TCX.2) — the signature hero-video treatment, centralized.
  *
  * This is the one place the hero-video contract lives, so TCX.4 only has to
- * pass `src` + `poster` and the autoplay/muted/loop/inline + scrim + reduced-
+ * pass sources + `poster` and the autoplay/muted/loop/inline + scrim + reduced-
  * motion + no-layout-shift behavior is already correct.
  *
  *   - autoPlay + muted + loop + playsInline  → ambient time-lapse, no controls
  *   - poster                                  → paints instantly, never blocks
+ *   - preload="metadata"                      → first paint rides the poster,
+ *                                               the video bytes stream after
+ *   - webm + mp4 sources                       → webm (smaller) first, mp4 for
+ *                                               Safari/iOS — both single-digit MB
  *   - object-cover fill + fixed aspect frame  → zero layout shift
  *   - gradient scrim                          → guarantees text contrast on top
  *
- * When `src` is absent (current pre-TCX.4 state) it renders a poised editorial
- * placeholder frame instead of an empty box, so the hero already reads finished.
+ * `src` accepts a single URL or an ordered list of { url, type } sources.
+ * When no source is given it renders a poised editorial placeholder frame
+ * instead of an empty box, so the hero already reads finished.
  */
+type VideoSource = { url: string; type: string };
+
 export function HeroVideo({
   src,
   poster,
   className,
   children,
 }: {
-  src?: string;
+  /** Single mp4 URL, or an ordered list of sources (webm first, mp4 fallback). */
+  src?: string | VideoSource[];
   poster?: string;
   className?: string;
   /** Overlay content (name, tagline, CTAs) rendered above the scrim. */
   children?: React.ReactNode;
 }) {
+  const sources: VideoSource[] =
+    typeof src === "string"
+      ? [{ url: src, type: "video/mp4" }]
+      : Array.isArray(src)
+        ? src
+        : [];
+
   return (
     <div className={cn("absolute inset-0 -z-10 overflow-hidden", className)}>
-      {src ? (
+      {sources.length > 0 ? (
         <video
           className="h-full w-full object-cover"
           autoPlay
           muted
           loop
           playsInline
+          // First paint rides the poster; the (single-digit MB) video streams
+          // after — so the hero never blocks load on mobile.
+          preload="metadata"
           poster={poster}
           // Decorative ambient video — not content; never announce to AT.
           aria-hidden
           tabIndex={-1}
         >
-          <source src={src} type="video/mp4" />
+          {sources.map((s) => (
+            <source key={s.url} src={s.url} type={s.type} />
+          ))}
         </video>
       ) : poster ? (
         // eslint-disable-next-line @next/next/no-img-element

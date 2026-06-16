@@ -41,7 +41,13 @@ export const site = {
   linkedinUrl: "https://www.linkedin.com/in/tanner-castora-335a0b159",
   xUrl: "https://x.com/Tanner_Castora",
   youtubeReelUrl: "https://www.youtube.com/watch?v=CbcNqnRAi5Y",
+  // Just the ID, for the lightweight click-to-play <YouTubeFacade> (TCX.4).
+  youtubeReelId: "CbcNqnRAi5Y",
   mediumUrl: "https://medium.com/@Tannercastora",
+
+  // --- Resume (TCX.4) --------------------------------------------------------
+  // Real PDF served from /public (the repo), never hotlinked from Drive.
+  resumePdf: "/Tanner-Castora-Resume.pdf",
 } as const;
 
 // Section anchors — single source of truth for nav + in-page links.
