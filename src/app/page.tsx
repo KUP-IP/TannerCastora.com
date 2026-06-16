@@ -13,9 +13,11 @@ import { Contact } from "@/components/site/sections/contact";
  *
  * Nav-anchored sections: Home (#home) · Meet Tanner (#meet) · Author (#author)
  * · Broadcasting Reel (#reel) · Resume (#resume). Recognition + Contact are
- * kept in the page (Wave B refines them) and reachable by scroll / the contact
- * CTA. The book section currently carries the #author anchor (Wave B rebuilds
- * it as the full Author page).
+ * kept in the page and reachable by scroll / the contact CTA.
+ *
+ * Final v2 order (Wave B): home → meet → recognition → author (Book, #author,
+ * the full author/book page) → reel (Broadcasting, #reel, self-host + 2 YT) →
+ * resume → contact.
  */
 export default function Home() {
   return (
@@ -25,9 +27,9 @@ export default function Home() {
         <HomeSection />
         <Meet />
         <Recognition />
+        <Book />
         <Broadcasting />
         <Resume />
-        <Book />
         <Contact />
       </main>
       <SiteFooter />

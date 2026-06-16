@@ -4,48 +4,83 @@ import {
   SectionHeading,
   SectionLead,
 } from "@/components/site/section";
-import { CtaLink } from "@/components/site/cta";
 import { YouTubeFacade } from "@/components/site/youtube-facade";
-import { site } from "@/lib/site";
+import { media, site } from "@/lib/site";
 
 /**
- * Broadcasting — section 4: the reel. One of the two "let's talk" payloads
- * (reel + resume), reachable in one tap from the hero CTA.
+ * Broadcasting Reel (#reel) — v2 Wave B hybrid. One of the two "let's talk"
+ * payloads (reel + resume), reachable in one tap from the hero CTA.
  *
- * Copy is real (TCX.3). The reel is Tanner's canonical 2026 YouTube reel, wired
- * (TCX.4) as a lightweight click-to-play façade: thumbnail only on first paint,
- * the real player mounts on click — never autoplays, never taxes mobile load.
+ * Three clips, all click-to-play (nothing autoplays):
+ *   1. Reporting & Anchoring — SELF-HOSTED <video controls poster> encoded into
+ *      the repo (720p H.264 mp4 + VP9 webm, audio kept). No YouTube payload,
+ *      no Drive hotlink — the headline reel lives on our own domain.
+ *   2. Play-by-play — lightweight YouTube click-to-play façade.
+ *   3. Radio — lightweight YouTube click-to-play façade.
  */
+const clips = [
+  {
+    key: "playbyplay",
+    label: "Play-by-play",
+    videoId: site.reelPlayByPlayId,
+    title: "Tanner Castora — Play-by-play",
+  },
+  {
+    key: "radio",
+    label: "Radio",
+    videoId: site.reelRadioId,
+    title: "Tanner Castora — Radio",
+  },
+];
+
 export function Broadcasting() {
   return (
     <Section id="reel" width="wide">
       <div className="max-w-2xl">
-        <SectionLabel>Broadcasting</SectionLabel>
+        <SectionLabel>Broadcasting Reel</SectionLabel>
         <SectionHeading>On the air</SectionHeading>
         <SectionLead className="mt-5">
-          Anchor desk and the broadcast booth — weekend sports blocks, live
-          shots, and play-by-play across basketball and football. Here&apos;s a
-          look at the work.
+          Anchor desk, broadcast booth, and the microphone — reporting and
+          anchoring, play-by-play across basketball and football, and radio.
+          Here&apos;s a look at the work.
         </SectionLead>
-        <div className="mt-7">
-          <CtaLink
-            href={site.youtubeReelUrl}
-            size="lg"
-            className="rounded-full"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Watch the reel on YouTube
-          </CtaLink>
-        </div>
       </div>
 
-      {/* Click-to-play reel — façade loads only the thumbnail until pressed. */}
-      <YouTubeFacade
-        videoId={site.youtubeReelId}
-        title="Tanner Castora — 2026 Broadcasting Reel"
-        className="mt-10 aspect-video w-full"
-      />
+      {/* 1) Reporting & Anchoring — self-hosted, click-to-play with controls. */}
+      <figure className="mt-10">
+        <div className="overflow-hidden rounded-2xl border border-border bg-secondary">
+          <video
+            className="aspect-video w-full bg-black"
+            controls
+            preload="none"
+            playsInline
+            poster={media.reelAnchoring.poster}
+          >
+            {media.reelAnchoring.sources.map((s) => (
+              <source key={s.url} src={s.url} type={s.type} />
+            ))}
+          </video>
+        </div>
+        <figcaption className="mt-3 text-sm font-medium text-muted-foreground">
+          Reporting & Anchoring
+        </figcaption>
+      </figure>
+
+      {/* 2–3) Play-by-play + Radio — YouTube façades. */}
+      <div className="mt-8 grid gap-8 md:grid-cols-2">
+        {clips.map((c) => (
+          <figure key={c.key}>
+            <YouTubeFacade
+              videoId={c.videoId}
+              title={c.title}
+              className="aspect-video w-full"
+            />
+            <figcaption className="mt-3 text-sm font-medium text-muted-foreground">
+              {c.label}
+            </figcaption>
+          </figure>
+        ))}
+      </div>
     </Section>
   );
 }

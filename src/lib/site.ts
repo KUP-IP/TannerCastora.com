@@ -50,6 +50,11 @@ export const site = {
   youtubeReelUrl: "https://www.youtube.com/watch?v=ewtg3VBZo2g",
   // Just the ID, for the lightweight click-to-play <YouTubeFacade> (TCX.4).
   youtubeReelId: "ewtg3VBZo2g",
+  // v2 Wave B — the Broadcasting Reel section is a hybrid: the reporting/anchoring
+  // reel is self-hosted (media.reelAnchoring), while play-by-play and radio are
+  // lightweight YouTube click-to-play façades (operator-confirmed IDs).
+  reelPlayByPlayId: "VUT7KpdQ8z8",
+  reelRadioId: "vEeN611flcU",
   mediumUrl: "https://medium.com/@Tannercastora",
 
   // --- Resume (TCX.4) --------------------------------------------------------
@@ -110,6 +115,16 @@ export const media = {
     pic7: "/media/book-7.jpg",
     model: "/media/book-model.png",
     background: "/media/book-background.jpg",
+  },
+  // Broadcasting reel (Wave B) — self-hosted reporting/anchoring reel, encoded
+  // from Drive source to 720p H.264 mp4 + VP9 webm (audio kept), with a poster.
+  // Served from the repo; click-to-play <video controls>, NOT autoplay.
+  reelAnchoring: {
+    poster: "/media/reel-anchoring-poster.jpg",
+    sources: [
+      { url: "/media/reel-anchoring.webm", type: "video/webm" },
+      { url: "/media/reel-anchoring.mp4", type: "video/mp4" },
+    ],
   },
 } as const;
 
@@ -238,17 +253,63 @@ export const recognition = [
   },
 ] as const;
 
-// --- Book: one supporting section --------------------------------------------
-export const book = {
+// --- AUTHOR (#author): the full author / book section (v2 Wave B) ------------
+// Verbatim operator-supplied copy. Images interleave between story paragraphs
+// (referenced by media.book.*). The buy button points at the live Amazon Kindle
+// listing (operator-confirmed) and opens in a new tab. All copy lives here so
+// the JSX stays declarative.
+export const author = {
   title: "Stig and the Rise of South Dakota State Football",
-  blurb:
-    "The biography of Hall-of-Fame coach John “Stig” Stiegelmeier — built " +
-    "from 170+ interviews across 308 pages. I raised the startup costs myself, and " +
-    "since its 2025 release the book has passed $65,000 in sales and reached more " +
-    "than 40 retail locations.",
-  // Confirmed live purchase URL (operator-approved, TCX.6) — enables the buy button.
+  // The Amazon Kindle eBook listing — the v2 buy target (replaces the old
+  // paperback link). Opens in a new tab.
   purchaseUrl:
-    "https://us.amazon.com/Stig-South-Dakota-State-Football/dp/1960729047" as
-      | string
-      | null,
+    "https://www.amazon.com/Stig-South-Dakota-State-Football-ebook/dp/B0FVS22L83",
+  // Story copy, in order, each paragraph paired with the image(s) that follow it.
+  story: [
+    {
+      text:
+        "Shortly after leading South Dakota State Football to their first " +
+        "national championship (January 2023), John Stigelmeier – best known " +
+        "as “Coach Stig” – retired after 26 years as head coach.",
+      images: [{ src: media.book.pic2, alt: "Coach Stig" }],
+    },
+    {
+      text:
+        "While working for KELO, Tanner was assigned to cover SDSU athletics " +
+        "where his and Stig's friendship first began. Tanner approached Stig " +
+        "on the idea of a book, the ball coach agreed, and soon the two began " +
+        "weekly meetings where hours of conversation took place. After " +
+        "countless sitdowns with Stig, dozens of interviews with former " +
+        "players, assistant coaches and alumni, and over two years of work, " +
+        "Tanner released Stig and The Rise of South Dakota State Football in " +
+        "October 2025.",
+      images: [
+        { src: media.book.pic3, alt: "Tanner Castora and Coach Stig" },
+        { src: media.book.pic4, alt: "Stig and the Rise of South Dakota State Football" },
+      ],
+    },
+    {
+      text:
+        "The book is a deeply personal story of Stig's toughest and greatest " +
+        "moments as a father, husband, and coach; while also offering behind " +
+        "the scenes stories on Tucker Kraft, Dallas Goedert, and Mason " +
+        "McCormick (current NFL players), and many more as SDSU built towards " +
+        "their first national title.",
+      images: [],
+    },
+  ],
+  // Amazon review pull-quote + rating highlight.
+  review: {
+    quote:
+      "This was one of the best books I have ever read. I had a hard time " +
+      "putting it down and was sad when I finished it. I wanted it to be longer.",
+    attribution: "Michelle Young (Amazon review)",
+    ratings: "Rated 5★ on Amazon and 4.8★ on Goodreads.",
+  },
+  // Verbatim closing paragraph.
+  closing:
+    "Through more than a dozen successful book signings, strong online sales, " +
+    "and placement in over 60 retail stores, Stig and The Rise of South Dakota " +
+    "State Football has become one of the best-selling books in the Upper " +
+    "Midwest, with several thousand copies sold.",
 } as const;

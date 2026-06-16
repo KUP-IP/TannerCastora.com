@@ -8,10 +8,11 @@ import { site } from "@/lib/site";
  *
  * Copy + links are real and confirmed (email + phone operator-approved, TCX.6).
  */
+// v2 Wave B: YouTube removed from contact — the Broadcasting Reel section now
+// covers video. Email + phone lead; LinkedIn, X, and Medium round it out.
 const socials = [
   { label: "LinkedIn", href: site.linkedinUrl },
   { label: "X", href: site.xUrl },
-  { label: "YouTube", href: site.youtubeReelUrl },
   { label: "Medium", href: site.mediumUrl },
 ];
 
