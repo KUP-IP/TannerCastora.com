@@ -1,35 +1,42 @@
-# Content Flags — TannerCastora.com (TCX.3)
+# Content Flags — TannerCastora.com (TCX.3 → resolved in TCX.6)
 
-Items below were wired with the best known value but **must be confirmed by
-Tanner / the operator before the production cutover.** Nothing here is a blocker
-for preview deploys; each is a "verify before publish" gate.
+The TCX.6 finalization pass cleared the prior "verify before publish" gates with
+operator-confirmed values. Remaining open items are operator-owned and not
+content blockers.
 
 All copy was sourced from Tanner's own resume (treated as publishable per the
-TCX.3 source-of-truth verification) and written in his voice. Anything *not* on
-the resume was either omitted or flagged below.
+TCX.3 source-of-truth verification) and written in his voice.
 
-## Must confirm before publishing
+## Open (operator-owned, not a content blocker)
 
-1. **Public contact email** — wired as `Castoramedia1@gmail.com` (the address on
-   his resume), shown in the Contact section and used for the primary "Email
-   Tanner" CTA. **Confirm this is the address Tanner wants shown publicly** (vs.
-   a dedicated/aliased address). — `src/lib/site.ts` → `site.contactEmail`
+1. **DNS cutover timing** — canonical domain is `tannercastora.com` (with the
+   "a"), wired into `SITE_URL` / `metadataBase` / canonical + OG URLs. No Vercel
+   custom domain or DNS change has been made; the operator owns the cutover
+   timing. Metadata is correct and resolves fine on preview deploys until then.
 
-2. **Book purchase link** — currently **stubbed-and-flagged**: the buy button
-   renders as a disabled "link coming soon" state because `book.purchaseUrl` is
-   `null`. Likely Amazon URL pending confirmation:
-   `https://us.amazon.com/Stig-South-Dakota-State-Football/dp/1960729047`
-   (ISBN 9781960729040). **Do not enable until the operator confirms.** Set
-   `book.purchaseUrl` in `src/lib/site.ts` to go live.
+## Resolved in TCX.6 (operator-confirmed)
 
-3. **Location / recency wording** — the resume lists South Dakota roles dated
-   into 2026 while Tanner has "recently moved to Cleveland." The site presents
-   him as **Cleveland-based and available now** and does not assert current SD
-   roles. **Confirm this framing with Tanner** (and whether any SD role is still
-   active). — hero `site.availability` / `site.lookingFor`, bio in `src/lib/site.ts`
+1. **Public contact email** — RESOLVED. `Castoramedia1@gmail.com` confirmed as
+   the primary public contact; shown in Contact + primary "Email Tanner" CTA.
+   — `src/lib/site.ts` → `site.contactEmail`
 
-4. **Phone number** — `440-591-9132` is on the resume but is **not published**
-   on the site. Add only if the operator approves. — not currently wired.
+2. **Book purchase link** — RESOLVED. Live Amazon URL set and the buy button is
+   enabled: `https://us.amazon.com/Stig-South-Dakota-State-Football/dp/1960729047`
+   (ISBN 9781960729040). — `src/lib/site.ts` → `book.purchaseUrl`
+
+3. **Phone number** — RESOLVED. `440-591-9132` published in the Contact section
+   as a `tel:` link (operator-approved). — `src/lib/site.ts` → `site.phone`
+
+4. **Hero clip** — RESOLVED. Hero swapped from the book time-lapse to a KELO
+   anchor-desk broadcasting segment from Tanner's 2026 reel (source 88–99s),
+   re-encoded to `public/media/hero.{mp4,webm}` + `hero-poster.jpg`.
+
+5. **Canonical domain spelling** — RESOLVED. `tannercastora.com` (with the "a")
+   confirmed and wired (see open item #1 for DNS-cutover timing).
+
+6. **Location / recency wording** — the site presents Tanner as Cleveland-based
+   and available now and does not assert current SD roles. Framing stands; no
+   change required.
 
 ## Confirmed / verified (from Tanner's resume — published)
 

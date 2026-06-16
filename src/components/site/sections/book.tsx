@@ -10,10 +10,9 @@ import { book } from "@/lib/site";
 /**
  * Book — section 6: ONE supporting section, not the spine.
  *
- * Title + blurb are real (TCX.3). The purchase link is stubbed-and-flagged:
- * `book.purchaseUrl` is null until the operator confirms the live URL, so the
- * buy button renders as a disabled "coming soon" state (CONTENT-FLAGS.md #2).
- * Kept deliberately compact so the book stays secondary to the person.
+ * Title + blurb are real (TCX.3). The purchase link is live (operator-confirmed
+ * Amazon URL, TCX.6), so the buy button is enabled. Kept deliberately compact so
+ * the book stays secondary to the person.
  */
 export function Book() {
   return (

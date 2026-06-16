@@ -6,8 +6,7 @@ import { site } from "@/lib/site";
  * Contact — section 7: the conversion beat. Make contacting Tanner frictionless;
  * this is the primary CTA's destination and the site's whole reason to exist.
  *
- * Copy + links are real (TCX.3). FLAG: confirm the public email address before
- * the production cutover (CONTENT-FLAGS.md #1).
+ * Copy + links are real and confirmed (email + phone operator-approved, TCX.6).
  */
 const socials = [
   { label: "LinkedIn", href: site.linkedinUrl },
@@ -55,7 +54,21 @@ export function Contact() {
           ))}
         </div>
         <p className="mt-6 text-sm text-muted-foreground">
-          {site.contactEmail}
+          <a
+            href={`mailto:${site.contactEmail}`}
+            className="underline-offset-4 hover:underline"
+          >
+            {site.contactEmail}
+          </a>
+          <span className="mx-2 text-muted-foreground/50" aria-hidden>
+            ·
+          </span>
+          <a
+            href={`tel:${site.phoneTel}`}
+            className="underline-offset-4 hover:underline"
+          >
+            {site.phone}
+          </a>
         </p>
       </div>
     </Section>

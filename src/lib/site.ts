@@ -4,17 +4,17 @@
  * TCX.3 (Content & Identity) populated this with real copy in Tanner's voice and
  * his verified facts (sourced from his own resume — treated as publishable).
  *
- * Items marked FLAG below still need Tanner/operator confirmation before the
- * production cutover — see /CONTENT-FLAGS.md. They are wired with the best
- * known value but must be confirmed (e.g. the public contact email, the book
- * purchase URL, and the SD/Cleveland location wording).
+ * TCX.6 finalization resolved the prior content flags (email, phone, book
+ * purchase URL, hero clip, canonical domain spelling) — see /CONTENT-FLAGS.md.
+ * Only DNS cutover timing remains operator-owned.
  *
  *   - Media (hero video, reel, resume PDF, OG image) lands in TCX.4.
  *   - Visual system / tokens were locked in TCX.2.
  */
 
-// Canonical domain confirmed by operator: TannerCastora.com (WITH the "a").
-// Used as a metadataBase placeholder — DNS held by operator pending cutover.
+// Canonical domain confirmed by operator: tannercastora.com (WITH the "a").
+// Drives metadataBase + canonical/OG URLs. DNS cutover timing is operator-owned;
+// metadata only — no Vercel domain or DNS changes are made here.
 export const SITE_URL = "https://tannercastora.com";
 
 export const site = {
@@ -35,9 +35,11 @@ export const site = {
     "available now. Watch the reel, read the resume, and get in touch.",
 
   // --- Contact ---------------------------------------------------------------
-  // FLAG: confirm this is the address Tanner wants shown publicly (it is the
-  // one on his resume). See /CONTENT-FLAGS.md #1.
+  // Confirmed primary public contact email (operator-approved, TCX.6).
   contactEmail: "Castoramedia1@gmail.com",
+  // Operator-approved for public display; wired as a tel: link.
+  phone: "440-591-9132",
+  phoneTel: "+14405919132",
   linkedinUrl: "https://www.linkedin.com/in/tanner-castora-335a0b159",
   xUrl: "https://x.com/Tanner_Castora",
   youtubeReelUrl: "https://www.youtube.com/watch?v=CbcNqnRAi5Y",
@@ -114,8 +116,9 @@ export const book = {
     "from 170+ interviews across 308 pages. I raised the startup costs myself, and " +
     "since its 2025 release the book has passed $65,000 in sales and reached more " +
     "than 40 retail locations.",
-  // FLAG: confirm the live purchase URL before enabling the buy button.
-  // Likely Amazon link pending confirmation (do NOT hardcode live yet) —
-  // see /CONTENT-FLAGS.md #2.
-  purchaseUrl: null as string | null,
+  // Confirmed live purchase URL (operator-approved, TCX.6) — enables the buy button.
+  purchaseUrl:
+    "https://us.amazon.com/Stig-South-Dakota-State-Football/dp/1960729047" as
+      | string
+      | null,
 } as const;
