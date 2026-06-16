@@ -6,9 +6,16 @@ import { site } from "@/lib/site";
  * Contact — section 7: the conversion beat. Make contacting Tanner frictionless;
  * this is the primary CTA's destination and the site's whole reason to exist.
  *
- * TCX.3 confirms the real email + LinkedIn (open question #2). Values below are
- * PLACEHOLDER from site config and must be verified before publishing.
+ * Copy + links are real (TCX.3). FLAG: confirm the public email address before
+ * the production cutover (CONTENT-FLAGS.md #1).
  */
+const socials = [
+  { label: "LinkedIn", href: site.linkedinUrl },
+  { label: "X", href: site.xUrl },
+  { label: "YouTube", href: site.youtubeReelUrl },
+  { label: "Medium", href: site.mediumUrl },
+];
+
 export function Contact() {
   return (
     <Section id="contact" width="narrow" className="bg-accent/30">
@@ -20,13 +27,12 @@ export function Contact() {
           Let&apos;s talk.
         </h2>
         <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed text-muted-foreground text-pretty">
-          {/* PLACEHOLDER copy — TCX.3. */}
-          Hiring for an anchor, play-by-play, or reporting role? Reach out — the
-          reel and resume are a tap away.
+          Hiring for an anchor, play-by-play, or reporting role? I&apos;d love to
+          hear about it. Email is the fastest way to reach me — the reel and
+          resume are a tap away above.
         </p>
 
         <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
-          {/* PLACEHOLDER contact targets — verify real email + LinkedIn (TCX.3). */}
           <CtaLink
             href={`mailto:${site.contactEmail}`}
             size="lg"
@@ -34,20 +40,22 @@ export function Contact() {
           >
             Email Tanner
           </CtaLink>
-          <CtaLink
-            href={site.linkedinUrl}
-            size="lg"
-            variant="outline"
-            className="rounded-full"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            LinkedIn
-          </CtaLink>
+          {socials.map((s) => (
+            <CtaLink
+              key={s.label}
+              href={s.href}
+              size="lg"
+              variant="outline"
+              className="rounded-full"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {s.label}
+            </CtaLink>
+          ))}
         </div>
-        <p className="mt-6 text-xs text-muted-foreground">
-          Placeholder contact details — confirm real email & LinkedIn before
-          publishing (TCX.3).
+        <p className="mt-6 text-sm text-muted-foreground">
+          {site.contactEmail}
         </p>
       </div>
     </Section>

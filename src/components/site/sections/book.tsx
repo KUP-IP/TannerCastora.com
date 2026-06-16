@@ -5,12 +5,15 @@ import {
   Placeholder,
 } from "@/components/site/section";
 import { CtaLink } from "@/components/site/cta";
+import { book } from "@/lib/site";
 
 /**
  * Book — section 6: ONE supporting section, not the spine.
  *
- * TCX.3 confirms the exact title; TCX.4 wires the working purchase link. Kept
- * deliberately compact so the book stays secondary to the person.
+ * Title + blurb are real (TCX.3). The purchase link is stubbed-and-flagged:
+ * `book.purchaseUrl` is null until the operator confirms the live URL, so the
+ * buy button renders as a disabled "coming soon" state (CONTENT-FLAGS.md #2).
+ * Kept deliberately compact so the book stays secondary to the person.
  */
 export function Book() {
   return (
@@ -25,24 +28,32 @@ export function Book() {
         <div>
           <SectionLabel>The book</SectionLabel>
           <SectionHeading className="text-2xl sm:text-3xl md:text-4xl">
-            {/* PLACEHOLDER title — verify exact wording (TCX.3). */}
-            Stig and the Rise of South Dakota State Football
+            {book.title}
           </SectionHeading>
           <p className="mt-5 max-w-prose text-lg leading-relaxed text-muted-foreground text-pretty">
-            {/* PLACEHOLDER blurb — TCX.3. */}
-            A short, one-paragraph blurb lands here in TCX.3 — the book as a
-            supporting credential, not the center of the site.
+            {book.blurb}
           </p>
           <div className="mt-8">
-            {/* PLACEHOLDER purchase link — TCX.4 wires the real working URL. */}
-            <CtaLink
-              href="#book"
-              size="lg"
-              variant="outline"
-              className="rounded-full"
-            >
-              Buy the book (link — TCX.4)
-            </CtaLink>
+            {book.purchaseUrl ? (
+              <CtaLink
+                href={book.purchaseUrl}
+                size="lg"
+                variant="outline"
+                className="rounded-full"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Buy the book
+              </CtaLink>
+            ) : (
+              <span
+                aria-disabled
+                title="Purchase link coming soon — pending confirmation"
+                className="inline-flex h-11 cursor-not-allowed items-center rounded-full border border-border px-6 text-sm font-medium text-muted-foreground opacity-70"
+              >
+                Buy the book — link coming soon
+              </span>
+            )}
           </div>
         </div>
       </div>

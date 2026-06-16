@@ -21,14 +21,16 @@ export function Hero() {
 
       <div className="mx-auto w-full max-w-3xl px-6 text-center sm:px-8">
         <p className="reveal reveal-1 eyebrow mb-6 justify-center text-muted-foreground">
-          Cleveland, OH · Available now
+          {site.availability}
         </p>
         <h1 className="reveal reveal-2 font-display text-5xl font-medium leading-[0.98] tracking-[-0.02em] text-balance sm:text-7xl md:text-8xl">
           {site.name}
         </h1>
         <p className="reveal reveal-3 mx-auto mt-6 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
-          {/* PLACEHOLDER positioning line — final copy in TCX.3 (Tanner's voice). */}
           {site.tagline}.
+        </p>
+        <p className="reveal reveal-3 mx-auto mt-3 max-w-md text-balance text-base leading-relaxed text-foreground/70">
+          {site.lookingFor}
         </p>
         <div className="reveal reveal-4 mt-10 flex flex-wrap items-center justify-center gap-3">
           <CtaLink href="#contact" size="lg" className="rounded-full">
