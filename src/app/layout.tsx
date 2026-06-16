@@ -95,6 +95,20 @@ export default function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${fraunces.variable} h-full antialiased`}
     >
+      <head>
+        {/*
+          Prioritize the hero poster as the LCP paint. The hero <video> uses
+          preload="metadata", so the poster is what actually paints first on
+          mobile — preloading it (high priority) pulls LCP forward instead of
+          letting the poster queue behind the streaming video bytes.
+        */}
+        <link
+          rel="preload"
+          as="image"
+          href="/media/hero-poster.jpg"
+          fetchPriority="high"
+        />
+      </head>
       <body className="min-h-full flex flex-col bg-background text-foreground">
         {children}
       </body>

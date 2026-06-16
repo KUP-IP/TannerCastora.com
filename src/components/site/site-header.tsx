@@ -65,8 +65,10 @@ export function SiteHeader() {
               render={
                 <Button
                   variant="ghost"
-                  size="icon-sm"
-                  className="md:hidden"
+                  size="icon"
+                  // 40px touch target (-mr-2 keeps the icon optically aligned
+                  // to the edge while giving the thumb a comfortable hit area).
+                  className="-mr-2 md:hidden"
                   aria-label="Open menu"
                 />
               }

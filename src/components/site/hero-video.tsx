@@ -93,10 +93,19 @@ export function HeroVideo({
         </div>
       )}
 
-      {/* Scrim — guarantees foreground legibility over any frame. */}
+      {/* Scrim — a two-layer treatment that guarantees the lockup reads premium
+          over ANY frame (the time-lapse is busy by nature):
+            1. a vertical wash that anchors the top nav + grounds the footer CTAs,
+            2. a center-weighted radial that calms the noisy midground directly
+               behind the name lockup, so the serif floats instead of competing.
+          This is the difference between "text on a video" and the Smith-bar calm. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-background/40 via-background/55 to-background/85"
+        className="absolute inset-0 bg-gradient-to-b from-background/55 via-background/45 to-background/90"
+      />
+      <div
+        aria-hidden
+        className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_50%,var(--background)_0%,transparent_70%)] opacity-70"
       />
       {children}
     </div>

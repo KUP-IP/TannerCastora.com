@@ -66,7 +66,9 @@ export function SectionHeading({
   return (
     <h2
       className={cn(
-        "font-display text-3xl font-medium leading-[1.08] tracking-[-0.01em] text-balance sm:text-4xl md:text-[2.75rem]",
+        // `rise` gives every section heading the calm Smith-bar scroll reveal
+        // (pure-CSS, reduced-motion-safe — see globals.css).
+        "rise font-display text-3xl font-medium leading-[1.08] tracking-[-0.01em] text-balance sm:text-4xl md:text-[2.75rem]",
         className,
       )}
     >

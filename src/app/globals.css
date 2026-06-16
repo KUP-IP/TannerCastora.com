@@ -217,4 +217,28 @@
       transform: translateY(0);
     }
   }
+
+  /* Below-fold scroll reveal — the calm Smith-bar "rise into view".
+     Pure CSS (scroll-driven animations): ZERO JS, no payload, never blocks.
+     Each element eases up + in as it enters the viewport. The @supports guard
+     means browsers without animation-timeline just show the content (it never
+     starts hidden there), and prefers-reduced-motion disables it globally via
+     the base layer above — calm by default, still on request. */
+  @supports (animation-timeline: view()) {
+    .rise {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: rise-in linear both;
+      animation-timeline: view();
+      /* Begin as it enters, settle well before center — gentle, not flashy. */
+      animation-range: entry 0% cover 30%;
+    }
+  }
+
+  @keyframes rise-in {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
 }

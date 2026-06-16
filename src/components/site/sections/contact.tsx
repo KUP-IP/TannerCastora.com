@@ -23,7 +23,7 @@ export function Contact() {
         <div className="flex justify-center">
           <SectionLabel>Contact</SectionLabel>
         </div>
-        <h2 className="font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-balance sm:text-5xl md:text-6xl">
+        <h2 className="rise font-display text-4xl font-medium leading-[1.05] tracking-[-0.02em] text-balance sm:text-5xl md:text-6xl">
           Let&apos;s talk.
         </h2>
         <p className="mx-auto mt-5 max-w-md text-lg leading-relaxed text-muted-foreground text-pretty">
