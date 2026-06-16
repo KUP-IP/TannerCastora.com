@@ -15,7 +15,7 @@ import { book } from "@/lib/site";
  */
 export function Book() {
   return (
-    <Section id="book" width="wide">
+    <Section id="author" width="wide">
       <div className="grid gap-12 md:grid-cols-[0.7fr_1.3fr] md:items-center md:gap-16">
         {/* Book cover — real jacket art pulled from Tanner's prior site. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}

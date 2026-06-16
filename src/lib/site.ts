@@ -45,9 +45,11 @@ export const site = {
   phoneTel: "+14405919132",
   linkedinUrl: "https://www.linkedin.com/in/tanner-castora-335a0b159",
   xUrl: "https://x.com/Tanner_Castora",
-  youtubeReelUrl: "https://www.youtube.com/watch?v=CbcNqnRAi5Y",
+  // v2 (operator-confirmed) reel link — opens YouTube in a new tab from the
+  // Home "Watch the reel" CTA.
+  youtubeReelUrl: "https://www.youtube.com/watch?v=ewtg3VBZo2g",
   // Just the ID, for the lightweight click-to-play <YouTubeFacade> (TCX.4).
-  youtubeReelId: "CbcNqnRAi5Y",
+  youtubeReelId: "ewtg3VBZo2g",
   mediumUrl: "https://medium.com/@Tannercastora",
 
   // --- Resume (TCX.4) --------------------------------------------------------
@@ -55,20 +57,80 @@ export const site = {
   resumePdf: "/Tanner-Castora-Resume.pdf",
 } as const;
 
+// --- Media map (v2 Wave A) ---------------------------------------------------
+// Every web-optimized asset is downloaded into the repo (public/media) and
+// referenced by path here — NEVER hotlinked from Drive. Source → optimized
+// filename mapping is recorded inline so Wave B can wire the rest.
+//
+//   HOME
+//     Picture2.jpg  → /media/home-feature.jpg   (in use, Home)
+//     Picture1.jpg  → /media/home-alt.jpg        (optional/alt — unused for now)
+//     TimeLapse.mp4 → /media/timelapse.{mp4,webm} + /media/timelapse-poster.jpg
+//   MEET TANNER
+//     Picture5.jpg  → /media/meet-feature.jpg
+//     Picture6.jpg  → /media/meet-1.jpg
+//     Picture7.jpg  → /media/meet-2.jpg
+//     Picture8.jpg  → /media/meet-3.jpg
+//     Picture9.jpeg → /media/meet-4.jpg
+//     Picture10.jpg → /media/meet-5.jpg
+//     Picture11.jpg → /media/meet-6.jpg
+//   AUTHOR / BOOK (optimized for Wave B — produced, not yet wired)
+//     BookPicture1.jpg → /media/book-1.jpg   BookPicture2.JPG → /media/book-2.jpg
+//     BookPicture3.jpg → /media/book-3.jpg   BookPicture4.jpg → /media/book-4.jpg
+//     BookPicture5.jpg → /media/book-5.jpg   BookPicture6.jpg → /media/book-6.jpg
+//     BookPicture7.jpg → /media/book-7.jpg   Book Model.png  → /media/book-model.png
+//     BookBackground.jpg → /media/book-background.jpg
+export const media = {
+  // Home
+  homeFeature: "/media/home-feature.jpg",
+  homeAlt: "/media/home-alt.jpg",
+  timelapse: {
+    poster: "/media/timelapse-poster.jpg",
+    sources: [
+      { url: "/media/timelapse.webm", type: "video/webm" },
+      { url: "/media/timelapse.mp4", type: "video/mp4" },
+    ],
+  },
+  // Meet Tanner
+  meetFeature: "/media/meet-feature.jpg",
+  meet1: "/media/meet-1.jpg",
+  meet2: "/media/meet-2.jpg",
+  meet3: "/media/meet-3.jpg",
+  meet4: "/media/meet-4.jpg",
+  meet5: "/media/meet-5.jpg",
+  meet6: "/media/meet-6.jpg",
+  // Author / book (Wave B)
+  book: {
+    pic1: "/media/book-1.jpg",
+    pic2: "/media/book-2.jpg",
+    pic3: "/media/book-3.jpg",
+    pic4: "/media/book-4.jpg",
+    pic5: "/media/book-5.jpg",
+    pic6: "/media/book-6.jpg",
+    pic7: "/media/book-7.jpg",
+    model: "/media/book-model.png",
+    background: "/media/book-background.jpg",
+  },
+} as const;
+
 // Section anchors — single source of truth for nav + in-page links.
-// Order IS the person-first home flow.
+//
+// v2 restructure (operator-confirmed): still ONE page, reorganized so the nav
+// reads Home · Meet Tanner · Author · Broadcasting Reel · Resume. Section IDs
+// were renamed to match these anchors (hero→home, about→meet, book→author,
+// broadcasting→reel). Recognition + Contact are KEPT in the page (Wave B
+// refines them) — they're just not surfaced as top-level nav jump points.
 export const sections = [
-  { id: "hero", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "recognition", label: "Recognition" },
-  { id: "broadcasting", label: "Broadcasting" },
+  { id: "home", label: "Home" },
+  { id: "meet", label: "Meet Tanner" },
+  { id: "author", label: "Author" },
+  { id: "reel", label: "Broadcasting Reel" },
   { id: "resume", label: "Resume" },
-  { id: "book", label: "Book" },
-  { id: "contact", label: "Contact" },
 ] as const;
 
-// Nav shows the meaningful jump points (not "Home" — the logo handles that).
-export const navItems = sections.filter((s) => s.id !== "hero");
+// The 5 top-level nav jump points (the logo also routes Home, but Home stays in
+// the list so the active section is always represented).
+export const navItems = sections.filter((s) => s.id !== "home");
 
 // --- About: bio + credential bullets (the Smith "Meet" block) ----------------
 // Two short paragraphs in Tanner's voice (first person, warm, plainspoken).
@@ -86,6 +148,71 @@ export const bio = [
     "to report, I bring the same thing every time — preparation, warmth, and a real " +
     "respect for the audience.",
 ];
+
+// --- HOME (#home): the two intro paragraphs under the name ------------------
+// Verbatim v2 copy (operator-supplied). Third-person positioning.
+// FLAG: P2's source draft read "carried in close to [blank] stores" — the count
+// is unconfirmed, so it's rendered cleanly without a number here. The Author
+// page (Wave B) will state "over 60". Confirm the exact store count with Tanner.
+export const homeIntro = [
+  "After being hired at KELO – the CBS affiliate in Sioux Falls, SD – Tanner " +
+    "Castora became an Emmy-nominated sports reporter before going on to " +
+    "establish himself as one of the best-selling authors in the Upper Midwest.",
+  "Released in October 2025, his book, Stig and The Rise of South Dakota State " +
+    "Football has sold several thousand copies and is now carried in stores " +
+    "across the region.",
+] as const;
+
+// --- MEET TANNER (#meet): editorial bio, images interleaved at marked spots --
+// Verbatim v2 copy (operator-supplied). Each block's paragraph is followed by
+// the image(s) noted; the final block carries two images. Feature image
+// (meet-feature) sits above all blocks. Optimized filenames match media.meet*.
+export const meetFeature = media.meetFeature;
+export const meetBlocks = [
+  {
+    text:
+      "After graduating from Strongsville High School (Northeast Ohio), Tanner " +
+      "Castora attended South Carolina Upstate on a full Division I basketball " +
+      "scholarship.",
+    images: [{ src: media.meet1, alt: "Tanner Castora" }],
+  },
+  {
+    text:
+      "He eventually transferred to Kent State University, where he was a part " +
+      "of the Golden Flashes basketball team that advanced to the Men's NCAA " +
+      "Tournament. The following year Tanner shifted his focus from the court " +
+      "to the booth after being hired to call the Kent State basketball " +
+      "telecasts on ESPN 3. He ultimately graduated with a degree in journalism.",
+    images: [{ src: media.meet2, alt: "Tanner Castora" }],
+  },
+  {
+    text:
+      "He was soon hired by KELO – the CBS affiliate in Sioux Falls, South " +
+      "Dakota – where he became an Emmy-nominated sports reporter and anchor. " +
+      "After finishing his two-year contract with KELO, Tanner worked to " +
+      "establish himself as an independent/freelance journalist and broadcaster.",
+    images: [{ src: media.meet3, alt: "Tanner Castora" }],
+  },
+  {
+    text:
+      "With thousands of followers on his Medium page (an online publishing " +
+      "platform), Tanner has been credentialed to cover several events as an " +
+      "independent journalist, including the Men's NCAA Tournament, Missouri " +
+      "Valley and Big Ten Football games, and NFL games as well.",
+    images: [{ src: media.meet4, alt: "Tanner Castora" }],
+  },
+  {
+    text:
+      "He also became the host of a weekly sports radio show (Brookings Radio), " +
+      "has done play-by-play work for several South Dakota high school and " +
+      "college programs, all while writing the biography of John Stiegelmeier – " +
+      "a beloved hall of fame college football coach at South Dakota State.",
+    images: [
+      { src: media.meet5, alt: "Tanner Castora" },
+      { src: media.meet6, alt: "Tanner Castora" },
+    ],
+  },
+] as const;
 
 // Credential bullets — broadcasting / journalism / authorship.
 export const credentials = [

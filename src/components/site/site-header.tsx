@@ -29,14 +29,14 @@ export function SiteHeader() {
         className="mx-auto flex h-[4.5rem] w-full max-w-6xl items-center justify-between px-6 sm:px-8"
       >
         <a
-          href="#hero"
+          href="#home"
           className="font-display text-lg font-medium tracking-tight text-foreground transition-opacity hover:opacity-70"
         >
           {site.name}
         </a>
 
         {/* Desktop nav */}
-        <ul className="hidden items-center gap-8 md:flex">
+        <ul className="hidden items-center gap-7 md:flex lg:gap-8">
           {navItems.map((item) => (
             <li key={item.id}>
               <a

@@ -2,51 +2,82 @@ import {
   Section,
   SectionLabel,
   SectionHeading,
-  SectionLead,
 } from "@/components/site/section";
-import { bio, credentials } from "@/lib/site";
+import { meetFeature, meetBlocks } from "@/lib/site";
+import { cn } from "@/lib/utils";
 
 /**
- * About — section 2: who he is + credentials. Leads with the PERSON, not the book.
+ * Meet Tanner (#meet) — the editorial bio (v2 rebuild of the old About).
  *
- * Bio + credential bullets are real (TCX.3), sourced from Tanner's resume and
- * written in his voice, and live in @/lib/site as the single source of truth.
+ * A feature portrait opens the section, then the bio runs as alternating
+ * text/image blocks (reference: bennemtin.com/about). Copy is verbatim
+ * operator-supplied; images interleave at the marked spots. The final block
+ * carries two images, laid out as a pair. All content lives in @/lib/site.
  */
-export function About() {
+export function Meet() {
   return (
-    <Section id="about" width="wide">
-      <div className="grid gap-12 md:grid-cols-[0.85fr_1.15fr] md:items-start md:gap-16">
-        {/* Portrait (TCX.4) — Tanner's headshot, optimized and served from the
-            repo. Lazy + fixed aspect frame so it never shifts layout. */}
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/media/portrait.jpg"
-          alt="Tanner Castora"
-          loading="lazy"
-          className="aspect-[4/5] w-full rounded-2xl border border-border object-cover object-top md:sticky md:top-28"
-        />
+    <Section id="meet" width="wide">
+      <SectionLabel>Meet Tanner</SectionLabel>
+      <SectionHeading className="max-w-3xl">
+        From a Division I court to the anchor desk — and onto the page.
+      </SectionHeading>
 
-        <div>
-          <SectionLabel>About</SectionLabel>
-          <SectionHeading>Meet Tanner</SectionHeading>
-          <SectionLead className="mt-6">{bio[0]}</SectionLead>
+      {/* Feature portrait */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={meetFeature}
+        alt="Tanner Castora"
+        loading="lazy"
+        className="rise mt-10 aspect-[16/10] w-full rounded-2xl border border-border object-cover object-top sm:mt-12"
+      />
 
-          <p className="mt-5 leading-relaxed text-muted-foreground">
-            {bio[1]}
-          </p>
+      {/* Interleaved bio blocks — alternating text / image columns */}
+      <div className="mt-16 space-y-16 sm:mt-20 sm:space-y-24">
+        {meetBlocks.map((block, i) => {
+          const reversed = i % 2 === 1;
+          const isPair = block.images.length > 1;
+          return (
+            <div
+              key={i}
+              className={cn(
+                "grid items-center gap-8 md:gap-14",
+                // A single image → 2-up text/image; a pair → text over a wider
+                // image row so both photos breathe.
+                isPair
+                  ? "md:grid-cols-1"
+                  : "md:grid-cols-2",
+              )}
+            >
+              <p
+                className={cn(
+                  "rise text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl",
+                  reversed && !isPair && "md:order-2",
+                )}
+              >
+                {block.text}
+              </p>
 
-          <ul className="mt-9 space-y-4 border-t border-border pt-8">
-            {credentials.map((c) => (
-              <li key={c} className="flex gap-3.5">
-                <span
-                  aria-hidden
-                  className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-brand"
-                />
-                <span className="text-base leading-relaxed">{c}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
+              <div
+                className={cn(
+                  "rise",
+                  isPair && "grid grid-cols-1 gap-6 sm:grid-cols-2",
+                  reversed && !isPair && "md:order-1",
+                )}
+              >
+                {block.images.map((img) => (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    key={img.src}
+                    src={img.src}
+                    alt={img.alt}
+                    loading="lazy"
+                    className="aspect-[4/3] w-full rounded-2xl border border-border object-cover"
+                  />
+                ))}
+              </div>
+            </div>
+          );
+        })}
       </div>
     </Section>
   );

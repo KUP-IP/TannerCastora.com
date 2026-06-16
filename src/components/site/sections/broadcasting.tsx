@@ -18,7 +18,7 @@ import { site } from "@/lib/site";
  */
 export function Broadcasting() {
   return (
-    <Section id="broadcasting" width="wide">
+    <Section id="reel" width="wide">
       <div className="max-w-2xl">
         <SectionLabel>Broadcasting</SectionLabel>
         <SectionHeading>On the air</SectionHeading>
