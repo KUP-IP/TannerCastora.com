@@ -1,8 +1,4 @@
-import {
-  Section,
-  SectionLabel,
-  SectionHeading,
-} from "@/components/site/section";
+import { Section, SectionLabel } from "@/components/site/section";
 import { meetFeature, meetBlocks } from "@/lib/site";
 import { cn } from "@/lib/utils";
 
@@ -18,9 +14,6 @@ export function Meet() {
   return (
     <Section id="meet" width="wide">
       <SectionLabel>Meet Tanner</SectionLabel>
-      <SectionHeading className="max-w-3xl">
-        From a Division I court to the anchor desk — and onto the page.
-      </SectionHeading>
 
       {/* Feature portrait */}
       {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -28,7 +21,7 @@ export function Meet() {
         src={meetFeature}
         alt="Tanner Castora"
         loading="lazy"
-        className="rise mt-10 aspect-[16/10] w-full rounded-2xl border border-border object-cover object-top sm:mt-12"
+        className="rise mt-8 aspect-[16/10] w-full rounded-2xl border border-border object-cover object-top sm:mt-10"
       />
 
       {/* Interleaved bio blocks — alternating text / image columns */}
@@ -71,7 +64,16 @@ export function Meet() {
                     src={img.src}
                     alt={img.alt}
                     loading="lazy"
-                    className="aspect-[4/3] w-full rounded-2xl border border-border object-cover"
+                    // Paired images (the final block holds the book-cover photo)
+                    // are shown in full — object-contain on a soft surface so the
+                    // bottom of the cover (his name) is never cropped. Single
+                    // images keep the editorial object-cover crop.
+                    className={cn(
+                      "aspect-[4/3] w-full rounded-2xl border border-border",
+                      isPair
+                        ? "bg-secondary object-contain"
+                        : "object-cover",
+                    )}
                   />
                 ))}
               </div>

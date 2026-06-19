@@ -40,9 +40,8 @@ export function Broadcasting() {
         <SectionLabel>Broadcasting Reel</SectionLabel>
         <SectionHeading>On the air</SectionHeading>
         <SectionLead className="mt-5">
-          Anchor desk, broadcast booth, and the microphone — reporting and
-          anchoring, play-by-play across basketball and football, and radio.
-          Here&apos;s a look at the work.
+          The anchor desk, field reporting, and play-by-play work — here&apos;s
+          a look at Tanner on the mic.
         </SectionLead>
       </div>
 

@@ -193,11 +193,10 @@ export const meetBlocks = [
   },
   {
     text:
-      "He eventually transferred to Kent State University, where he was a part " +
-      "of the Golden Flashes basketball team that advanced to the Men's NCAA " +
-      "Tournament. The following year Tanner shifted his focus from the court " +
-      "to the booth after being hired to call the Kent State basketball " +
-      "telecasts on ESPN 3. He ultimately graduated with a degree in journalism.",
+      "He eventually transferred to Kent State University, where he was part " +
+      "of the basketball team that reached the NCAA Tournament before " +
+      "transitioning into broadcasting and calling games on ESPN3. He " +
+      "ultimately graduated with a journalism degree.",
     images: [{ src: media.meet2, alt: "Tanner Castora" }],
   },
   {
@@ -210,18 +209,17 @@ export const meetBlocks = [
   },
   {
     text:
-      "With thousands of followers on his Medium page (an online publishing " +
-      "platform), Tanner has been credentialed to cover several events as an " +
-      "independent journalist, including the Men's NCAA Tournament, Missouri " +
-      "Valley and Big Ten Football games, and NFL games as well.",
+      "Along with hosting a weekly sports radio show and doing play-by-play " +
+      "work for several high school and college programs, Tanner dedicated the " +
+      "majority of his time to writing the biography of John Stiegelmeier – a " +
+      "beloved hall of fame college football coach at South Dakota State.",
     images: [{ src: media.meet4, alt: "Tanner Castora" }],
   },
   {
     text:
-      "He also became the host of a weekly sports radio show (Brookings Radio), " +
-      "has done play-by-play work for several South Dakota high school and " +
-      "college programs, all while writing the biography of John Stiegelmeier – " +
-      "a beloved hall of fame college football coach at South Dakota State.",
+      "After countless days of research and conducting over 170 interviews, " +
+      "Stig and The Rise of South Dakota State Football was released in " +
+      "October 2025.",
     images: [
       { src: media.meet5, alt: "Tanner Castora" },
       { src: media.meet6, alt: "Tanner Castora" },
@@ -269,20 +267,17 @@ export const author = {
     {
       text:
         "Shortly after leading South Dakota State Football to their first " +
-        "national championship (January 2023), John Stigelmeier – best known " +
+        "national championship (January 2023), John Stiegelmeier – best known " +
         "as “Coach Stig” – retired after 26 years as head coach.",
       images: [{ src: media.book.pic2, alt: "Coach Stig" }],
     },
     {
       text:
-        "While working for KELO, Tanner was assigned to cover SDSU athletics " +
-        "where his and Stig's friendship first began. Tanner approached Stig " +
-        "on the idea of a book, the ball coach agreed, and soon the two began " +
-        "weekly meetings where hours of conversation took place. After " +
-        "countless sitdowns with Stig, dozens of interviews with former " +
-        "players, assistant coaches and alumni, and over two years of work, " +
-        "Tanner released Stig and The Rise of South Dakota State Football in " +
-        "October 2025.",
+        "While covering SDSU athletics for KELO, Tanner developed a friendship " +
+        "with Stig and pitched the idea of a book following his retirement. " +
+        "After two years of weekly meetings and dozens of interviews with " +
+        "former players and assistants, Tanner released Stig and The Rise of " +
+        "South Dakota State Football in October 2025.",
       images: [
         { src: media.book.pic3, alt: "Tanner Castora and Coach Stig" },
         { src: media.book.pic4, alt: "Stig and the Rise of South Dakota State Football" },
@@ -290,11 +285,10 @@ export const author = {
     },
     {
       text:
-        "The book is a deeply personal story of Stig's toughest and greatest " +
-        "moments as a father, husband, and coach; while also offering behind " +
-        "the scenes stories on Tucker Kraft, Dallas Goedert, and Mason " +
-        "McCormick (current NFL players), and many more as SDSU built towards " +
-        "their first national title.",
+        "The book chronicles Stig's greatest challenges and triumphs as a " +
+        "father, husband, and coach, while revealing behind-the-scenes stories " +
+        "of NFL players Tucker Kraft, Dallas Goedert, Mason McCormick, and " +
+        "others during SDSU's rise to its first national championship.",
       images: [],
     },
   ],
@@ -308,8 +302,8 @@ export const author = {
   },
   // Verbatim closing paragraph.
   closing:
-    "Through more than a dozen successful book signings, strong online sales, " +
-    "and placement in over 60 retail stores, Stig and The Rise of South Dakota " +
-    "State Football has become one of the best-selling books in the Upper " +
-    "Midwest, with several thousand copies sold.",
+    "Fueled by strong online sales, more than a dozen successful book " +
+    "signings, and placement in over 60 retail stores, Tanner has sold " +
+    "several thousand copies of the book and become one of the best selling " +
+    "authors in the Upper Midwest.",
 } as const;

@@ -16,14 +16,16 @@ import {
  * SiteHeader (TCX.2 themed) — the persistent landmark.
  *
  * Editorial, quiet: a serif wordmark, understated nav links with an animated
- * underline, one obvious primary CTA, and a mobile sheet menu. The bar starts
- * transparent-ish and frosts on scroll via the translucent backdrop.
+ * underline, one obvious primary CTA, and a mobile sheet menu. Rendered as a
+ * clear, persistent top bar (vj-smith reference): a solid/translucent frosted
+ * background with a hairline border + soft shadow that reads as a deliberate
+ * bar over the hero video — consistent across the whole page.
  */
 export function SiteHeader() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/65">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background/90 shadow-sm backdrop-blur-md supports-[backdrop-filter]:bg-background/80">
       <nav
         aria-label="Primary"
         className="mx-auto flex h-[4.5rem] w-full max-w-6xl items-center justify-between px-6 sm:px-8"

@@ -8,67 +8,26 @@ import { CtaLink } from "@/components/site/cta";
 import { site } from "@/lib/site";
 
 /**
- * Resume — section 5: on-page highlights + PDF view/download. The second
+ * Resume — section 5: a clean, single-message handoff to the PDF. The second
  * "let's talk" payload, reachable in one tap.
  *
- * Copy + highlights are real (TCX.3), sourced from Tanner's resume. TCX.4 drops
- * the real PDF into /public and points the links at it (served from the repo).
+ * Simplified (Outline P2): no on-page highlight rows — just the prompt and the
+ * two buttons (view / download), both wired to the real PDF served from
+ * /public (never hotlinked).
  */
-const highlights = [
-  {
-    role: "Sports Reporter & Anchor",
-    org: "CBS / KELO · Sioux Falls, SD",
-    note: "Anchored weekend sports blocks; shot, wrote, and edited weekly feature stories.",
-  },
-  {
-    role: "Color & Play-by-Play",
-    org: "ESPN+ / Teleproductions · Kent State basketball",
-    note: "Men's and women's college hoops.",
-  },
-  {
-    role: "Play-by-Play & Sports-Talk Host",
-    org: "Big Sioux Sports Media · Brookings Radio",
-    note: "High school sports play-by-play and a weekly sports-talk show.",
-  },
-  {
-    role: "B.A., Broadcast Journalism",
-    org: "Kent State University",
-    note: "NCAA Division I basketball; Cleveland-area native.",
-  },
-];
-
 export function Resume() {
   return (
     <Section id="resume" className="bg-accent/30">
       <SectionLabel>Resume</SectionLabel>
       <SectionHeading>The resume</SectionHeading>
       <SectionLead className="mt-5">
-        A decade around the games — anchor desk, broadcast booth, and the
-        reporting in between. The highlights are below; the full resume is one
-        tap away.
+        Tanner&apos;s full resume is just one tap away.
       </SectionLead>
 
-      <ul className="mt-10 divide-y divide-border border-y border-border">
-        {highlights.map((h) => (
-          <li
-            key={h.role}
-            className="grid gap-1 py-5 sm:grid-cols-[1fr_1.4fr] sm:gap-6"
-          >
-            <div>
-              <p className="font-medium leading-snug">{h.role}</p>
-              <p className="text-sm text-muted-foreground">{h.org}</p>
-            </div>
-            <p className="text-sm leading-relaxed text-muted-foreground">
-              {h.note}
-            </p>
-          </li>
-        ))}
-      </ul>
-
       <div className="mt-9 flex flex-wrap gap-3">
-        {/* Real PDF served from /public (TCX.4). View opens in a new tab —
-            the mobile-safe fallback, since iOS Safari renders PDFs inline
-            there rather than forcing a download. */}
+        {/* Real PDF served from /public. View opens in a new tab — the
+            mobile-safe fallback, since iOS Safari renders PDFs inline there
+            rather than forcing a download. */}
         <CtaLink
           href={site.resumePdf}
           size="lg"
@@ -85,7 +44,7 @@ export function Resume() {
           className="rounded-full"
           download="Tanner-Castora-Resume.pdf"
         >
-          Download PDF
+          Download resume
         </CtaLink>
       </div>
     </Section>

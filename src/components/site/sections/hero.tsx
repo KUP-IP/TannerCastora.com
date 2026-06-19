@@ -31,10 +31,10 @@ export function Home() {
           <h1 className="reveal reveal-2 font-display text-5xl font-medium leading-[0.98] tracking-[-0.02em] text-balance sm:text-7xl md:text-8xl">
             {site.name}
           </h1>
-          <p className="reveal reveal-3 mx-auto mt-7 max-w-xl text-balance text-lg leading-relaxed text-muted-foreground sm:text-xl">
+          <p className="reveal reveal-3 mx-auto mt-7 max-w-xl text-balance text-lg font-medium leading-relaxed text-foreground sm:text-xl">
             {homeIntro[0]}
           </p>
-          <p className="reveal reveal-3 mx-auto mt-4 max-w-xl text-balance text-base leading-relaxed text-foreground/75">
+          <p className="reveal reveal-3 mx-auto mt-4 max-w-xl text-balance text-base leading-relaxed text-foreground">
             {homeIntro[1]}
           </p>
           <div className="reveal reveal-4 mt-10 flex flex-wrap items-center justify-center gap-3">

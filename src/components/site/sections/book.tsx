@@ -2,7 +2,6 @@ import {
   Section,
   SectionLabel,
   SectionHeading,
-  SectionLead,
 } from "@/components/site/section";
 import { CtaLink } from "@/components/site/cta";
 import { LoopVideo } from "@/components/site/loop-video";
@@ -37,10 +36,6 @@ export function Book() {
       <div className="max-w-2xl">
         <SectionLabel>Author</SectionLabel>
         <SectionHeading>{author.title}</SectionHeading>
-        <SectionLead className="mt-5">
-          A two-year labor of reporting — the inside story of a Hall-of-Fame
-          coach and the program he built into a national champion.
-        </SectionLead>
       </div>
 
       {/* Featured: book time-lapse + the first book photo. */}
@@ -147,19 +142,20 @@ export function Book() {
         {author.closing}
       </p>
 
-      {/* Bottom collage — pic5, pic6, pic7. */}
-      <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={media.book.pic6}
-          alt="Tanner Castora at a book signing"
-          loading="lazy"
-          className="aspect-[4/5] w-full rounded-2xl border border-border object-cover shadow-sm sm:col-span-2 sm:aspect-[16/10] lg:col-span-1 lg:row-span-2 lg:aspect-[3/4]"
-        />
+      {/* Bottom collage — ordered BookReplacement1 (pic5) → BookPicture6
+          (the "waiting in line" photo, kept in the MIDDLE) → BookPicture7. */}
+      <div className="mt-14 grid gap-5 sm:grid-cols-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={media.book.pic5}
           alt="Stig and the Rise of South Dakota State Football"
+          loading="lazy"
+          className="aspect-[4/3] w-full rounded-2xl border border-border object-cover shadow-sm"
+        />
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={media.book.pic6}
+          alt="Readers waiting in line at a book signing"
           loading="lazy"
           className="aspect-[4/3] w-full rounded-2xl border border-border object-cover shadow-sm"
         />
