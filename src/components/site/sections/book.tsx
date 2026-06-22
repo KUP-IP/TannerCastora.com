@@ -6,6 +6,7 @@ import {
 import { CtaLink } from "@/components/site/cta";
 import { LoopVideo } from "@/components/site/loop-video";
 import { author, media } from "@/lib/site";
+import { emphasizeTitle } from "@/components/site/book-title-text";
 
 /**
  * Author (#author) — v2 Wave B: the full author / book page.
@@ -92,7 +93,7 @@ export function Book() {
         {author.story.map((block, i) => (
           <div key={i} className="mt-10 first:mt-0">
             <p className="max-w-prose text-lg leading-relaxed text-foreground/90 text-pretty">
-              {block.text}
+              {emphasizeTitle(block.text)}
             </p>
             {block.images.length > 0 && (
               <div

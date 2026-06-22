@@ -84,11 +84,7 @@ export function Home() {
             label="Time-lapse of Tanner Castora writing and producing his book"
           />
           <figcaption className="mt-4 text-center text-sm text-muted-foreground">
-            From first page to finished book — a time-lapse of the work behind{" "}
-            <span className="text-foreground">
-              Stig and the Rise of South Dakota State Football
-            </span>
-            .
+            A time-lapse from one of Tanner Castora&apos;s book signings
           </figcaption>
         </figure>
       </div>

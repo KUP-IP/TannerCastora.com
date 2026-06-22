@@ -1,5 +1,6 @@
 import { Section, SectionLabel } from "@/components/site/section";
 import { meetFeature, meetBlocks } from "@/lib/site";
+import { emphasizeTitle } from "@/components/site/book-title-text";
 import { cn } from "@/lib/utils";
 
 /**
@@ -47,7 +48,7 @@ export function Meet() {
                   reversed && !isPair && "md:order-2",
                 )}
               >
-                {block.text}
+                {emphasizeTitle(block.text)}
               </p>
 
               <div

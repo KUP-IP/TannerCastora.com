@@ -47,6 +47,30 @@ export function Resume() {
           Download resume
         </CtaLink>
       </div>
+
+      <p className="mt-10 text-xs font-semibold uppercase tracking-[0.12em] text-muted-foreground">
+        Letter of recommendation
+      </p>
+      <div className="mt-3 flex flex-wrap gap-3">
+        <CtaLink
+          href={site.letterPdf}
+          size="lg"
+          className="rounded-full"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View letter (PDF)
+        </CtaLink>
+        <CtaLink
+          href={site.letterPdf}
+          size="lg"
+          variant="outline"
+          className="rounded-full"
+          download="Tanner-Castora-Letter-of-Recommendation.pdf"
+        >
+          Download letter
+        </CtaLink>
+      </div>
     </Section>
   );
 }

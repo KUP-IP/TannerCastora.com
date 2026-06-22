@@ -1,13 +1,15 @@
+"use client";
+
+import { useRef } from "react";
 import { cn } from "@/lib/utils";
 
 /**
- * LoopVideo — an inline, ambient looping video that lives *inside* a content
- * column (as opposed to <HeroVideo>, which is a full-bleed background).
+ * LoopVideo — inline ambient looping video (the book time-lapse). Muted + loop +
+ * autoplay (universally allowed muted), playsInline, with a poster that paints
+ * instantly so it never blocks layout.
  *
- * Used for the book time-lapse at the bottom of Home: muted + loop + autoplay
- * (muted autoplay is universally allowed), playsInline, with a poster that
- * paints instantly so it never blocks layout. Rounded editorial frame to match
- * the "Anchor Desk Editorial" system.
+ * PART 3: the frame is clickable — tap/click expands the clip to full screen
+ * (native Fullscreen API on desktop, webkitEnterFullscreen on iOS Safari).
  *
  * `src` accepts an ordered list of { url, type } sources (webm first, mp4
  * fallback). Aspect ratio fixes the frame so there's zero layout shift.
@@ -29,15 +31,43 @@ export function LoopVideo({
   /** Accessible label for the ambient clip. */
   label?: string;
 }) {
+  const ref = useRef<HTMLVideoElement>(null);
+
+  const openFullscreen = () => {
+    const v = ref.current as
+      | (HTMLVideoElement & {
+          webkitEnterFullscreen?: () => void;
+          webkitRequestFullscreen?: () => void;
+        })
+      | null;
+    if (!v) return;
+    if (v.requestFullscreen) void v.requestFullscreen();
+    else if (v.webkitRequestFullscreen) v.webkitRequestFullscreen();
+    else if (v.webkitEnterFullscreen) v.webkitEnterFullscreen();
+  };
+
   return (
     <div
+      role="button"
+      tabIndex={0}
+      onClick={openFullscreen}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          openFullscreen();
+        }
+      }}
+      aria-label={
+        label ? `${label} — tap to play full screen` : "Play video full screen"
+      }
       className={cn(
-        "relative overflow-hidden rounded-2xl border border-border bg-muted",
+        "group relative cursor-pointer overflow-hidden rounded-2xl border border-border bg-muted",
         aspect,
         className,
       )}
     >
       <video
+        ref={ref}
         className="h-full w-full object-cover"
         autoPlay
         muted
@@ -45,14 +75,18 @@ export function LoopVideo({
         playsInline
         preload="metadata"
         poster={poster}
-        aria-label={label}
-        aria-hidden={label ? undefined : true}
+        aria-hidden
         tabIndex={-1}
       >
         {src.map((s) => (
           <source key={s.url} src={s.url} type={s.type} />
         ))}
       </video>
+
+      {/* Expand affordance — appears on hover/focus. */}
+      <span className="pointer-events-none absolute bottom-3 right-3 inline-flex items-center rounded-full bg-black/55 px-2.5 py-1 text-xs font-medium text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100 group-focus:opacity-100">
+        Tap for full screen
+      </span>
     </div>
   );
 }

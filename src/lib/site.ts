@@ -60,6 +60,8 @@ export const site = {
   // --- Resume (TCX.4) --------------------------------------------------------
   // Real PDF served from /public (the repo), never hotlinked from Drive.
   resumePdf: "/Tanner-Castora-Resume.pdf",
+  // Letter of recommendation (from Coach John Stiegelmeier) — view/download (PART 3).
+  letterPdf: "/Letter-of-Recommendation.pdf",
 } as const;
 
 // --- Media map (v2 Wave A) ---------------------------------------------------
@@ -195,7 +197,7 @@ export const meetBlocks = [
     text:
       "He eventually transferred to Kent State University, where he was part " +
       "of the basketball team that reached the NCAA Tournament before " +
-      "transitioning into broadcasting and calling games on ESPN3. He " +
+      "transitioning into broadcasting to call games on ESPN3. He " +
       "ultimately graduated with a journalism degree.",
     images: [{ src: media.meet2, alt: "Tanner Castora" }],
   },
@@ -212,7 +214,7 @@ export const meetBlocks = [
       "Along with hosting a weekly sports radio show and doing play-by-play " +
       "work for several high school and college programs, Tanner dedicated the " +
       "majority of his time to writing the biography of John Stiegelmeier – a " +
-      "beloved hall of fame college football coach at South Dakota State.",
+      "beloved hall-of-fame college football coach at South Dakota State.",
     images: [{ src: media.meet4, alt: "Tanner Castora" }],
   },
   {
