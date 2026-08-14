@@ -57,6 +57,14 @@ export const site = {
   reelRadioId: "vEeN611flcU",
   mediumUrl: "https://medium.com/@Tannercastora",
 
+  // Footer sponsor credit — KUP lockup served from /public (never hotlinked).
+  sponsor: {
+    name: "KUP Solutions",
+    url: "https://kup.solutions",
+    logoWebp: "/brand/kup-logo.webp",
+    logoPng: "/brand/kup-logo.png",
+  },
+
   // --- Resume (TCX.4) --------------------------------------------------------
   // Real PDF served from /public (the repo), never hotlinked from Drive.
   resumePdf: "/Tanner-Castora-Resume.pdf",
@@ -167,14 +175,10 @@ export const bio = [
 ];
 
 // --- HOME (#home): the two intro paragraphs under the name ------------------
-// Verbatim v2 copy (operator-supplied). Third-person positioning.
-// FLAG: P2's source draft read "carried in close to [blank] stores" — the count
-// is unconfirmed, so it's rendered cleanly without a number here. The Author
-// page (Wave B) will state "over 60". Confirm the exact store count with Tanner.
+// Lead line: Tanner's Aug 11 wording (shortened from the prior KELO sentence —
+// "too much going on there"). Book paragraph is unchanged v2 copy.
 export const homeIntro = [
-  "After being hired at KELO – the CBS affiliate in Sioux Falls, SD – Tanner " +
-    "Castora became an Emmy-nominated sports reporter before going on to " +
-    "establish himself as one of the best-selling authors in the Upper Midwest.",
+  "Emmy-nominated sports reporter / best selling author in the Upper Midwest",
   "Released in October 2025, his book, Stig and The Rise of South Dakota State " +
     "Football has sold several thousand copies and is now carried in stores " +
     "across the region.",
