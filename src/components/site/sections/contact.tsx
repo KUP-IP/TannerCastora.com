@@ -32,7 +32,7 @@ export function Contact() {
           resume are a tap away above.
         </p>
 
-        <div className="mt-9 flex flex-wrap items-center justify-center gap-3">
+        <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
           <CtaLink
             href={`mailto:${site.contactEmail}`}
             size="lg"
@@ -40,33 +40,35 @@ export function Contact() {
           >
             Email Tanner
           </CtaLink>
-          {socials.map((s) => (
-            <CtaLink
-              key={s.label}
-              href={s.href}
-              size="lg"
-              variant="outline"
-              className="rounded-full"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {s.label}
-            </CtaLink>
-          ))}
+          <div className="flex flex-wrap items-center justify-center gap-2 sm:contents">
+            {socials.map((s) => (
+              <CtaLink
+                key={s.label}
+                href={s.href}
+                size="lg"
+                variant="outline"
+                className="rounded-full"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {s.label}
+              </CtaLink>
+            ))}
+          </div>
         </div>
-        <p className="mt-6 text-sm text-muted-foreground">
+        <p className="mt-6 flex flex-col items-center text-sm text-muted-foreground sm:flex-row sm:justify-center">
           <a
             href={`mailto:${site.contactEmail}`}
-            className="underline-offset-4 hover:underline"
+            className="inline-flex min-h-11 items-center underline-offset-4 hover:underline"
           >
             {site.contactEmail}
           </a>
-          <span className="mx-2 text-muted-foreground/50" aria-hidden>
+          <span className="hidden text-muted-foreground/50 sm:mx-2 sm:inline" aria-hidden>
             ·
           </span>
           <a
             href={`tel:${site.phoneTel}`}
-            className="underline-offset-4 hover:underline"
+            className="inline-flex min-h-11 items-center underline-offset-4 hover:underline"
           >
             {site.phone}
           </a>

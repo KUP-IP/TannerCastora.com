@@ -34,10 +34,10 @@ export function Home() {
           <p className="reveal reveal-3 mx-auto mt-7 max-w-xl text-balance text-lg font-medium leading-relaxed text-foreground sm:text-xl">
             {homeIntro[0]}
           </p>
-          <p className="reveal reveal-3 mx-auto mt-4 max-w-xl text-balance text-base leading-relaxed text-foreground">
+          <p className="reveal reveal-3 mx-auto mt-3 max-w-sm text-pretty text-sm leading-relaxed text-muted-foreground sm:mt-4 sm:max-w-xl sm:text-base">
             {homeIntro[1]}
           </p>
-          <div className="reveal reveal-4 mt-10 flex flex-wrap items-center justify-center gap-3">
+          <div className="reveal reveal-4 mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
             <CtaLink
               href={`mailto:${site.contactEmail}`}
               size="lg"
@@ -57,11 +57,10 @@ export function Home() {
             </CtaLink>
             <CtaLink
               href="#author"
-              size="lg"
-              variant="outline"
-              className="rounded-full"
+              variant="link"
+              className="h-11 self-center px-2"
             >
-              Book
+              The book
             </CtaLink>
           </div>
         </div>
