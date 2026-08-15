@@ -3,11 +3,12 @@ import { test, expect } from "@playwright/test";
 /**
  * Conversion gate: "Get in touch" must land on the contact section.
  * A mailto: hero CTA is a fail — many phones have no mail handler, so the
- * primary hire button looks dead.
+ * primary hire button looks dead. A hash that updates the URL without
+ * scrolling is also a fail (Next.js same-page hash).
  */
 test.describe("Get in touch", () => {
   test("hero CTA is an in-page #contact link, not mailto", async ({ page }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "load" });
     const heroCta = page.locator("#home").getByRole("link", { name: "Get in touch" });
     await expect(heroCta).toBeVisible();
     await expect(heroCta).toHaveAttribute("href", "#contact");
@@ -16,13 +17,12 @@ test.describe("Get in touch", () => {
   test("clicking hero Get in touch scrolls the contact section into view", async ({
     page,
   }) => {
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "load" });
     await page.locator("#home").getByRole("link", { name: "Get in touch" }).click();
-    await expect(page).toHaveURL(/#contact$/);
-    await expect(page.locator("#contact")).toBeInViewport();
+    await expect(page).toHaveURL(/#contact/);
     await expect(
       page.locator("#contact").getByRole("heading", { name: "Let's talk." }),
-    ).toBeVisible();
+    ).toBeInViewport();
   });
 
   test("header Get in touch (desktop) scrolls to contact", async ({
@@ -30,17 +30,19 @@ test.describe("Get in touch", () => {
     isMobile,
   }) => {
     test.skip(isMobile, "Header CTA is hidden below the sm breakpoint");
-    await page.goto("/");
+    await page.goto("/", { waitUntil: "load" });
     await page
       .getByRole("navigation", { name: "Primary" })
       .getByRole("link", { name: "Get in touch" })
       .click();
-    await expect(page).toHaveURL(/#contact$/);
-    await expect(page.locator("#contact")).toBeInViewport();
+    await expect(page).toHaveURL(/#contact/);
+    await expect(
+      page.locator("#contact").getByRole("heading", { name: "Let's talk." }),
+    ).toBeInViewport();
   });
 
   test("contact still offers a real mailto for Email Tanner", async ({ page }) => {
-    await page.goto("/#contact");
+    await page.goto("/#contact", { waitUntil: "load" });
     const email = page.locator("#contact").getByRole("link", { name: "Email Tanner" });
     await expect(email).toBeVisible();
     const href = await email.getAttribute("href");
