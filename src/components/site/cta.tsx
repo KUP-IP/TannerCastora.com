@@ -12,9 +12,9 @@ import type { VariantProps } from "class-variance-authority";
  * <a> directly with buttonVariants. Keeps one consistent button look without
  * pulling in a Slot polyfill.
  *
- * In-page hashes (`#contact`) are scrolled explicitly. Next.js App Router can
- * update the URL without moving the viewport, which made "Get in touch" look
- * dead on production.
+ * Protocol links (`mailto:`, `tel:`) and in-page hashes are handled in click
+ * code. Next.js App Router can swallow native navigation, which made contact
+ * CTAs look dead on production.
  */
 type CtaLinkProps = React.ComponentProps<"a"> &
   VariantProps<typeof buttonVariants>;
@@ -39,16 +39,21 @@ export function CtaLink({
     <a
       href={href}
       className={cn(buttonVariants({ variant, size }), className)}
+      {...props}
       onClick={(e) => {
         onClick?.(e);
-        if (e.defaultPrevented || !href?.startsWith("#") || href.length < 2) {
+        if (e.defaultPrevented || !href) return;
+        if (href.startsWith("mailto:") || href.startsWith("tel:")) {
+          e.preventDefault();
+          window.location.href = href;
           return;
         }
-        e.preventDefault();
-        scrollToHash(href);
-        history.pushState(null, "", href);
+        if (href.startsWith("#") && href.length > 1) {
+          e.preventDefault();
+          scrollToHash(href);
+          history.pushState(null, "", href);
+        }
       }}
-      {...props}
     />
   );
 }

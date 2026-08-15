@@ -41,11 +41,22 @@ test.describe("Get in touch", () => {
     ).toBeInViewport();
   });
 
-  test("contact still offers a real mailto for Email Tanner", async ({ page }) => {
+  test("Email Tanner opens mail to Tanner with a prefilled subject and body", async ({
+    page,
+  }) => {
     await page.goto("/#contact", { waitUntil: "load" });
     const email = page.locator("#contact").getByRole("link", { name: "Email Tanner" });
     await expect(email).toBeVisible();
     const href = await email.getAttribute("href");
-    expect(href).toMatch(/^mailto:[^@]+@/);
+    expect(href).toBeTruthy();
+    const parsed = new URL(href!);
+    expect(parsed.protocol).toBe("mailto:");
+    expect(parsed.pathname).toBe("Castoramedia1@gmail.com");
+    expect(parsed.searchParams.get("subject")).toBe(
+      "Contacting you from your website",
+    );
+    expect(parsed.searchParams.get("body")).toBe(
+      "Contacting you from your website",
+    );
   });
 });

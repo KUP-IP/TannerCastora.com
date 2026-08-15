@@ -40,6 +40,8 @@ export const site = {
   // --- Contact ---------------------------------------------------------------
   // Confirmed primary public contact email (operator-approved, TCX.6).
   contactEmail: "Castoramedia1@gmail.com",
+  contactMailSubject: "Contacting you from your website",
+  contactMailBody: "Contacting you from your website",
   // Operator-approved for public display; wired as a tel: link.
   phone: "440-591-9132",
   phoneTel: "+14405919132",
@@ -71,6 +73,13 @@ export const site = {
   // Letter of recommendation (from Coach John Stiegelmeier) — view/download (PART 3).
   letterPdf: "/Letter-of-Recommendation.pdf",
 } as const;
+
+/** Opens the visitor's mail app addressed to Tanner, with subject + body filled. */
+export function contactMailtoHref() {
+  const subject = encodeURIComponent(site.contactMailSubject);
+  const body = encodeURIComponent(site.contactMailBody);
+  return `mailto:${site.contactEmail}?subject=${subject}&body=${body}`;
+}
 
 // --- Media map (v2 Wave A) ---------------------------------------------------
 // Every web-optimized asset is downloaded into the repo (public/media) and

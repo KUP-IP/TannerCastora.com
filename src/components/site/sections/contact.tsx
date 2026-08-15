@@ -1,6 +1,6 @@
 import { Section, SectionLabel } from "@/components/site/section";
 import { CtaLink } from "@/components/site/cta";
-import { site } from "@/lib/site";
+import { contactMailtoHref, site } from "@/lib/site";
 
 /**
  * Contact — section 7: the conversion beat. Make contacting Tanner frictionless;
@@ -34,7 +34,7 @@ export function Contact() {
 
         <div className="mt-9 flex flex-col items-stretch gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
           <CtaLink
-            href={`mailto:${site.contactEmail}`}
+            href={contactMailtoHref()}
             size="lg"
             className="rounded-full"
           >
@@ -57,12 +57,13 @@ export function Contact() {
           </div>
         </div>
         <p className="mt-6 flex flex-col items-center text-sm text-muted-foreground sm:flex-row sm:justify-center">
-          <a
-            href={`mailto:${site.contactEmail}`}
-            className="inline-flex min-h-11 items-center underline-offset-4 hover:underline"
+          <CtaLink
+            href={contactMailtoHref()}
+            variant="link"
+            className="inline-flex h-auto min-h-11 items-center px-0 text-sm font-normal"
           >
             {site.contactEmail}
-          </a>
+          </CtaLink>
           <span className="hidden text-muted-foreground/50 sm:mx-2 sm:inline" aria-hidden>
             ·
           </span>
