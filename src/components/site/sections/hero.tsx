@@ -27,7 +27,7 @@ export function Home() {
           ]}
         />
 
-        <div className="mx-auto w-full max-w-3xl px-6 text-center sm:px-8">
+        <div className="relative z-10 mx-auto w-full max-w-3xl px-6 text-center sm:px-8">
           <h1 className="reveal reveal-2 font-display text-5xl font-medium leading-[0.98] tracking-[-0.02em] text-balance sm:text-7xl md:text-8xl">
             {site.name}
           </h1>
@@ -39,7 +39,7 @@ export function Home() {
           </p>
           <div className="reveal reveal-4 mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
             <CtaLink
-              href={`mailto:${site.contactEmail}`}
+              href="#contact"
               size="lg"
               className="rounded-full"
             >

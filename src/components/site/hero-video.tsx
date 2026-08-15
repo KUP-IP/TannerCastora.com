@@ -101,11 +101,11 @@ export function HeroVideo({
           This is the difference between "text on a video" and the Smith-bar calm. */}
       <div
         aria-hidden
-        className="absolute inset-0 bg-gradient-to-b from-background/65 via-background/55 to-background/95"
+        className="pointer-events-none absolute inset-0 bg-gradient-to-b from-background/65 via-background/55 to-background/95"
       />
       <div
         aria-hidden
-        className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_50%,var(--background)_0%,var(--background)_30%,transparent_78%)] opacity-90"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_50%,var(--background)_0%,var(--background)_30%,transparent_78%)] opacity-90"
       />
       {children}
     </div>
