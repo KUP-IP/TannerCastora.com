@@ -40,8 +40,8 @@ export const site = {
   // --- Contact ---------------------------------------------------------------
   // Confirmed primary public contact email (operator-approved, TCX.6).
   contactEmail: "Castoramedia1@gmail.com",
-  contactMailSubject: "Contacting you from your website",
-  contactMailBody: "Contacting you from your website",
+  contactMailSubject: "Contacting from your website",
+  contactMailBody: "Hello Tanner,",
   // Operator-approved for public display; wired as a tel: link.
   phone: "440-591-9132",
   phoneTel: "+14405919132",

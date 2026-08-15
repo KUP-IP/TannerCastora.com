@@ -53,10 +53,8 @@ test.describe("Get in touch", () => {
     expect(parsed.protocol).toBe("mailto:");
     expect(parsed.pathname).toBe("Castoramedia1@gmail.com");
     expect(parsed.searchParams.get("subject")).toBe(
-      "Contacting you from your website",
+      "Contacting from your website",
     );
-    expect(parsed.searchParams.get("body")).toBe(
-      "Contacting you from your website",
-    );
+    expect(parsed.searchParams.get("body")).toBe("Hello Tanner,");
   });
 });
