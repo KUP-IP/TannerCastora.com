@@ -39,13 +39,6 @@ export function Home() {
           </p>
           <div className="reveal reveal-4 mx-auto mt-8 flex w-full max-w-xs flex-col items-stretch gap-3 sm:mt-10 sm:max-w-none sm:w-auto sm:flex-row sm:flex-wrap sm:items-center sm:justify-center">
             <CtaLink
-              href="#contact"
-              size="lg"
-              className="rounded-full"
-            >
-              Get in touch
-            </CtaLink>
-            <CtaLink
               href={site.youtubeReelUrl}
               size="lg"
               variant="outline"
@@ -57,10 +50,18 @@ export function Home() {
             </CtaLink>
             <CtaLink
               href="#author"
-              variant="link"
-              className="h-11 self-center px-2"
+              size="lg"
+              variant="outline"
+              className="rounded-full"
             >
               The book
+            </CtaLink>
+            <CtaLink
+              href="#meet"
+              size="lg"
+              className="rounded-full"
+            >
+              Tanner’s bio
             </CtaLink>
           </div>
         </div>
